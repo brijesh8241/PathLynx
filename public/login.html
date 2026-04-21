@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PathLynx - Premium Access Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --auth-bg: #0F172A;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--auth-bg);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 40%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Outfit', sans-serif;
+            color: white;
+            overflow-y: auto;
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 480px;
+            padding: 2.5rem;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .auth-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .auth-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            text-decoration: none;
+        }
+
+        .auth-logo img {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px var(--brand-primary-glow);
+        }
+
+        .auth-logo span {
+            font-size: 1.75rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, white, #94A3B8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .role-selector {
+            display: flex;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px;
+            border-radius: 14px;
+            margin-bottom: 2.5rem;
+            gap: 4px;
+        }
+
+        .role-tab {
+            flex: 1;
+            text-align: center;
+            padding: 0.75rem;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #94A3B8;
+        }
+
+        .role-tab.active {
+            background: white;
+            color: var(--auth-bg);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #94A3B8;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #475569;
+            font-size: 1rem;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1.5px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            padding: 0.85rem 1rem 0.85rem 3rem;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .input-wrapper input:focus {
+            border-color: var(--brand-primary);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 1rem;
+            background: #6366F1;
+            border: none;
+            border-radius: 14px;
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .auth-btn:hover {
+            background: #4F46E5;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.4);
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #94A3B8;
+        }
+
+        .auth-footer a {
+            color: #6366F1;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .social-divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            color: #475569;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .social-divider::before, 
+        .social-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .social-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1.5px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 0.75rem;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mode dependent styles */
+        #signup-fields {
+            display: none;
+        }
+
+        .mode-signup #signup-fields {
+            display: block;
+        }
+
+        .mode-signup .login-only {
+            display: none;
+        }
+
+        .mode-signup #submit-btn-text::before {
+            content: 'Create Account';
+        }
+
+        .mode-login #submit-btn-text::before {
+            content: 'Sign In';
+        }
+    </style>
+</head>
+
+<body class="mode-login">
+
+    <div class="auth-container">
+        <div class="auth-card">
+            
+            <div class="auth-header">
+                <a href="index.html" class="auth-logo">
+                    <img src="img/Logo.jpeg" alt="PathLynx">
+                    <span>PathLynx</span>
+                </a>
+                <h2 id="form-title">Welcome Back</h2>
+                <p id="form-subtitle">Secure access to your career portal</p>
+            </div>
+
+            <div class="role-selector">
+                <div class="role-tab active" data-role="student">Student</div>
+                <div class="role-tab" data-role="recruiter">Recruiter</div>
+                <div class="role-tab" data-role="admin">Admin</div>
+            </div>
+
+            <form action="/auth/local" method="POST" id="auth-form">
+                <input type="hidden" name="role" id="role-input" value="student">
+                <input type="hidden" name="action" id="action-input" value="login">
+
+                <div id="signup-fields">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-id-card"></i>
+                            <input type="text" name="name" id="name-input" placeholder="John Doe">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Username</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" name="username" placeholder="Enter your username" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" name="password" placeholder="••••••••" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="auth-btn">
+                    <span id="submit-btn-text"></span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+
+            <div class="login-only">
+                <div class="social-divider">Or continue with</div>
+
+                <div class="social-grid">
+                    <a href="/auth/google" class="social-btn">
+                        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="G" style="width: 18px;">
+                        Google
+                    </a>
+                    <button class="social-btn" onclick="alert('GitHub integration coming soon!')">
+                        <i class="fa-brands fa-github"></i>
+                        GitHub
+                    </button>
+                </div>
+            </div>
+
+            <div class="auth-footer">
+                <span id="toggle-text">Don't have an account?</span>
+                <a href="javascript:void(0)" id="toggle-mode">Join PathLynx</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check if opened via file:// protocol
+        if (window.location.protocol === 'file:') {
+            const warning = document.createElement('div');
+            warning.style.padding = '1rem';
+            warning.style.background = '#FEF2F2';
+            warning.style.color = '#B91C1C';
+            warning.style.borderRadius = '12px';
+            warning.style.marginBottom = '2rem';
+            warning.style.fontSize = '0.9rem';
+            warning.style.textAlign = 'center';
+            warning.style.border = '1px solid #FCA5A5';
+            warning.innerHTML = '<strong>⚠️ Local File Detected</strong><br>Login will not work via file path. Please run <code>node server.js</code> and open <code>http://localhost:3000</code> in your browser.';
+            document.querySelector('.auth-header').after(warning);
+        }
+
+        const bodyValue = document.body;
+        const toggleBtn = document.getElementById('toggle-mode');
+        const actionInput = document.getElementById('action-input');
+        const formTitle = document.getElementById('form-title');
+        const formSubtitle = document.getElementById('form-subtitle');
+        const toggleText = document.getElementById('toggle-text');
+        const roleTabs = document.querySelectorAll('.role-tab');
+        const roleInput = document.getElementById('role-input');
+
+        // Toggle between Login and Signup
+        toggleBtn.addEventListener('click', () => {
+            if (bodyValue.classList.contains('mode-login')) {
+                bodyValue.classList.remove('mode-login');
+                bodyValue.classList.add('mode-signup');
+                actionInput.value = 'signup';
+                formTitle.innerText = 'Create Account';
+                formSubtitle.innerText = 'Start your professional journey today';
+                toggleText.innerText = 'Already have an account?';
+                toggleBtn.innerText = 'Sign In';
+            } else {
+                bodyValue.classList.remove('mode-signup');
+                bodyValue.classList.add('mode-login');
+                actionInput.value = 'login';
+                formTitle.innerText = 'Welcome Back';
+                formSubtitle.innerText = 'Secure access to your career portal';
+                toggleText.innerText = "Don't have an account?";
+                toggleBtn.innerText = 'Join PathLynx';
+            }
+        });
+
+        // Role Selection
+        roleTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                roleTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                roleInput.value = tab.dataset.role;
+            });
+        });
+    </script>
+</body>
+
+</html>
