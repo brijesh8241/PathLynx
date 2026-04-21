@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume AI - PathLynx</title>
+    <title>Curriculum - PathLynx</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -16,8 +16,8 @@
         .nav-link.active { background: var(--primary); box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3); }
         .main-content { flex-grow: 1; overflow-y: auto; padding: 3rem; }
         .content-card { background: white; border-radius: 24px; padding: 2.5rem; border: 1px solid #E2E8F0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-        .resume-preview { background: #F1F5F9; border-radius: 16px; padding: 2rem; min-height: 400px; border: 2px dashed #CBD5E1; display: flex; align-items: center; justify-content: center; flex-direction: column; color: #94A3B8; }
-        .btn-premium { background: var(--primary); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 12px; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; }
+        .module-item { background: #fdfdfd; border-radius: 16px; padding: 1.5rem; border: 1px solid #F1F5F9; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; }
+        .btn-premium { background: var(--primary); color: white; border: none; padding: 0.7rem 1.2rem; border-radius: 10px; font-weight: 700; cursor: pointer; }
     </style>
 </head>
 
@@ -34,9 +34,9 @@
             <ul id="roles-nav-container" style="list-style: none; padding: 0;">
                 <div class="role-nav-student">
                     <li><a href="dashboard.html" class="nav-link"><i class="fa-solid fa-chart-pie"></i> Overview</a></li>
-                    <li><a href="curriculum.html" class="nav-link"><i class="fa-solid fa-book-open"></i> Curriculum</a></li>
+                    <li><a href="curriculum.html" class="nav-link active"><i class="fa-solid fa-book-open"></i> Curriculum</a></li>
                     <li><a href="projects.html" class="nav-link"><i class="fa-solid fa-code"></i> Projects</a></li>
-                    <li><a href="resume.html" class="nav-link active"><i class="fa-solid fa-file-lines"></i> Resume AI</a></li>
+                    <li><a href="resume.html" class="nav-link"><i class="fa-solid fa-file-lines"></i> Resume AI</a></li>
                 </div>
             </ul>
         </nav>
@@ -49,18 +49,26 @@
     <main class="main-content">
         <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3.5rem;">
             <div>
-                <h1 style="font-size: 2.25rem; font-weight: 800;">Resume Intelligence</h1>
-                <p style="color: #64748B;">Optimize your resume for applicant tracking systems using AI.</p>
+                <h1 style="font-size: 2.25rem; font-weight: 800;">Academic Curriculum</h1>
+                <p style="color: #64748B;">Master the skills required for your dream path.</p>
             </div>
-            <button class="btn-premium">Optimized with AI <i class="fa-solid fa-wand-magic-sparkles"></i></button>
         </header>
 
         <section class="content-card">
-            <h2 style="margin-bottom: 1.5rem;">ATS Optimization</h2>
-            <div class="resume-preview">
-                <i class="fa-solid fa-file-pdf" style="font-size: 3rem; margin-bottom: 1.5rem; opacity: 0.5;"></i>
-                <p>Upload your current resume to start the AI analysis.</p>
-                <button class="btn-premium" style="margin-top: 1.5rem; background: #64748B;">Upload PDF</button>
+            <h2 style="margin-bottom: 2rem;">Current Courses</h2>
+            <div class="module-item">
+                <div>
+                    <h3 style="font-weight: 700;">Full Stack Foundations</h3>
+                    <p style="font-size: 0.9rem; color: #64748B;">HTML5, CSS3, Modern JS (ES6+)</p>
+                </div>
+                <button class="btn-premium">Continue Learning</button>
+            </div>
+            <div class="module-item">
+                <div>
+                    <h3 style="font-weight: 700;">Backend Architecture</h3>
+                    <p style="font-size: 0.9rem; color: #64748B;">Node.js, Express, RESTful APIs</p>
+                </div>
+                <button class="btn-premium">Start Module</button>
             </div>
         </section>
     </main>

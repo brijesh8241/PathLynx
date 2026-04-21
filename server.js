@@ -139,6 +139,17 @@ app.post('/auth/local', (req, res) => {
 });
 
 // API Endpoints
+// Protected Dashboard Routes
+['/dashboard.html', '/curriculum.html', '/projects.html', '/resume.html'].forEach(route => {
+    app.get(route, (req, res) => {
+        if (req.session.user) {
+            res.sendFile(path.join(__dirname, 'public', route));
+        } else {
+            res.redirect('/login.html');
+        }
+    });
+});
+
 app.get('/api/user', (req, res) => {
     if (req.session.user) {
         res.json({ authenticated: true, user: req.session.user });

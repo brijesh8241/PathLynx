@@ -178,11 +178,21 @@ function updateHeader(data) {
         const sideStudentRadar = document.getElementById('side-student-radar');
         const roleBadge = document.getElementById('role-badge');
         
-        if (activeNav) activeNav.style.display = 'block';
+        if (activeNav) {
+            activeNav.style.display = 'block';
+            // Set first child as active by default if none is
+            const firstLink = activeNav.querySelector('a');
+            if (firstLink && !activeNav.querySelector('.active')) {
+                firstLink.classList.add('active');
+            }
+        }
         if (activeStats) activeStats.style.display = 'grid';
         if (activeSection) activeSection.style.display = 'block';
         if (role === 'student' && sideStudentRadar) sideStudentRadar.style.display = 'block';
-        if (roleBadge) roleBadge.innerText = role;
+        if (roleBadge) {
+            roleBadge.innerText = role;
+            roleBadge.style.display = 'inline-block';
+        }
 
         if (dashTitle) {
             if (role === 'admin') {
