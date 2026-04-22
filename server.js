@@ -42,19 +42,19 @@ app.use(express.urlencoded({ extended: true }));
 
 // Unified Auth Logic (Using Username + Bcrypt)
 app.post('/auth/local', async (req, res) => {
-    const { username, password, role, action, name } = req.body;
+    const { email, password, role, action, name } = req.body;
     
     try {
         if (action === 'signup') {
-            // 1. Check if username exists
+            // 1. Check if email exists
             const { data: existingUser } = await supabase
                 .from('users')
                 .select('*')
-                .eq('username', username)
+                .eq('email', email)
                 .maybeSingle();
 
             if (existingUser) {
-                return res.status(400).send('Choose a different username. This one is taken.');
+                return res.status(400).send('Email already registered. Please login.');
             }
 
             // 2. Hash Password
@@ -64,10 +64,10 @@ app.post('/auth/local', async (req, res) => {
             const { data: newUser, error } = await supabase
                 .from('users')
                 .insert([{ 
-                    username, 
+                    email, 
                     password: hashedPassword, 
                     role: role || 'student', 
-                    name: name || username 
+                    name: name || email 
                 }])
                 .select()
                 .single();
@@ -75,7 +75,7 @@ app.post('/auth/local', async (req, res) => {
             if (error) throw error;
 
             req.session.user = newUser;
-            console.log(`✨ New User Registered: ${username}`);
+            console.log(`✨ New User Registered: ${email}`);
             return res.redirect('/dashboard.html');
 
         } else {
@@ -83,21 +83,21 @@ app.post('/auth/local', async (req, res) => {
             const { data: user, error } = await supabase
                 .from('users')
                 .select('*')
-                .eq('username', username)
+                .eq('email', email)
                 .maybeSingle();
 
             if (!user) {
-                return res.status(401).send('User not found. Please sign up first.');
+                return res.status(401).send('Account not found. Please sign up first.');
             }
 
             // Check Password
             const isMatch = await bcrypt.compare(password, user.password);
             if (!isMatch) {
-                return res.status(401).send('Incorrect password. Please try again.');
+                return res.status(401).send('Incorrect password.');
             }
 
             req.session.user = user;
-            console.log(`🔓 User Logged In: ${username}`);
+            console.log(`🔓 User Logged In: ${email}`);
             return res.redirect('/dashboard.html');
         }
     } catch (err) {
@@ -131,7 +131,7 @@ app.post('/api/onboarding', async (req, res) => {
         const { data, error } = await supabase
             .from('users')
             .update({ selectedPath, skills: skills || [] })
-            .eq('username', req.session.user.username)
+            .eq('email', req.session.user.email)
             .select()
             .single();
 
