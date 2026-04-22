@@ -208,7 +208,12 @@ app.post('/api/generate-roadmap', async (req, res) => {
     });
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is running at http://localhost:${PORT}`);
-});
-app.use('/api/auth', require('./config/routes/auth'))
+app.use('/api/auth', require('./config/routes/auth'));
+
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`Server is running at http://localhost:${PORT}`);
+    });
+}
+
+module.exports = app;
