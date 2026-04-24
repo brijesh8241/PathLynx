@@ -103,8 +103,14 @@
                     <ul id="tips-list" style="color: #1E40AF; padding-left: 1.5rem; line-height: 1.6;"></ul>
                 </div>
             </div>
+            <div style="margin-top: 2rem;">
+                <h3 style="margin-bottom: 1rem;"><i class="fa-solid fa-wand-magic-sparkles" style="color: #6366F1;"></i> AI Optimized Summary</h3>
+                <div style="background: #1E293B; color: #E2E8F0; padding: 1.5rem; border-radius: 12px; border: 1px solid #334155;">
+                    <p id="optimized-summary-text" style="line-height: 1.6; font-size: 0.95rem; font-style: italic;">Generating optimal ATS summary...</p>
+                </div>
+            </div>
             <div style="margin-top: 2rem; text-align: right;">
-                 <button class="btn-premium" onclick="location.reload()" style="background: #64748B;">Analyze Another</button>
+                 <button class="btn-premium" onclick="document.getElementById('results-section').style.display='none'; document.getElementById('upload-section').style.display='block'; document.getElementById('progress-bar').style.width='0%';" style="background: #64748B;">Upload New Resume</button>
             </div>
         </section>
     </main>

@@ -85,8 +85,79 @@
                 </div>
             </div>
         </section>
+        <!-- Code Editor Modal -->
+        <div id="editor-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(15, 23, 42, 0.9); z-index:1000; align-items:center; justify-content:center; backdrop-filter: blur(5px);">
+            <div style="width:80%; height:80%; background:#1E1E1E; border-radius:12px; overflow:hidden; display:flex; flex-direction:column; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); border: 1px solid #333;">
+                <div style="background:#252526; padding:15px 20px; display:flex; justify-content:space-between; align-items:center; color:#E2E8F0; border-bottom: 1px solid #333;">
+                    <span id="editor-title" style="font-weight: 700; font-family: 'Outfit', sans-serif;"><i class="fa-solid fa-code"></i> Antigravity IDE</span>
+                    <div style="display: flex; gap: 1rem; align-items: center;">
+                        <select id="editor-theme" onchange="changeTheme(this.value)" style="background: #1E293B; color: white; border: 1px solid #475569; padding: 0.3rem 0.5rem; border-radius: 6px; font-size: 0.8rem; outline: none;">
+                            <option value="vs-dark">VS Code Dark</option>
+                            <option value="vs">VS Code Light</option>
+                            <option value="hc-black">High Contrast</option>
+                            <option value="antigravity">Antigravity Custom</option>
+                        </select>
+                        <button onclick="document.getElementById('editor-modal').style.display='none'" style="background:transparent; border:none; color:#94A3B8; cursor:pointer; font-size:1.2rem;"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                </div>
+                <div id="monaco-editor" style="flex-grow:1;"></div>
+            </div>
+        </div>
+
     </main>
 
     <script src="js/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.36.1/min/vs/loader.min.js"></script>
+    <script>
+        let editorInstance = null;
+        require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.36.1/min/vs' }});
+        require(['vs/editor/editor.main'], function() {
+            window.monacoReady = true;
+            
+            // Define custom Antigravity theme
+            monaco.editor.defineTheme('antigravity', {
+                base: 'vs-dark',
+                inherit: true,
+                rules: [
+                    { background: '0F172A' },
+                    { token: 'comment', foreground: '64748B', fontStyle: 'italic' },
+                    { token: 'keyword', foreground: '38BDF8' },
+                    { token: 'string', foreground: '10B981' },
+                ],
+                colors: {
+                    'editor.background': '#0F172A',
+                    'editor.lineHighlightBackground': '#1E293B'
+                }
+            });
+        });
+
+        window.changeTheme = function(theme) {
+            if (editorInstance && window.monacoReady) {
+                monaco.editor.setTheme(theme);
+            }
+        };
+
+        window.openEditor = function(title, code) {
+            document.getElementById('editor-modal').style.display = 'flex';
+            document.getElementById('editor-title').innerHTML = '<i class="fa-solid fa-code"></i> ' + title;
+            
+            if (window.monacoReady) {
+                if (!editorInstance) {
+                    editorInstance = monaco.editor.create(document.getElementById('monaco-editor'), {
+                        value: code,
+                        language: 'javascript',
+                        theme: document.getElementById('editor-theme').value,
+                        automaticLayout: true,
+                        fontSize: 14,
+                        fontFamily: "'Fira Code', 'Courier New', monospace"
+                    });
+                } else {
+                    editorInstance.setValue(code);
+                }
+            } else {
+                document.getElementById('monaco-editor').innerHTML = '<div style="color:white; padding:20px;">Loading IDE... Please close and open again.</div>';
+            }
+        };
+    </script>
 </body>
 </html>

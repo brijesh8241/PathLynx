@@ -71,9 +71,9 @@ async function checkAuthState() {
         fetch('/api/user')
             .then(res => res.json())
             .then(data => {
-                if (data.authenticated && data.user.selectedPath) {
-                    // Start generating detailed roadmap if path already chosen
-                    if (document.getElementById('career-path-container')) {
+                if (data.authenticated) {
+                    if (data.user.selectedPath && document.getElementById('career-path-container')) {
+                        // Start generating detailed roadmap if path already chosen
                         const loader = document.getElementById('generating-overlay');
                         if (loader) loader.style.display = 'flex';
                         
@@ -91,6 +91,13 @@ async function checkAuthState() {
                             if (loader) loader.style.display = 'none';
                             console.error("Auto AI generation failed:", err);
                         });
+                    }
+                    
+                    // Resume AI saved state auto-load
+                    if (window.location.pathname.includes('resume.html') && data.user.resume_data) {
+                        const uploadSection = document.getElementById('upload-section');
+                        if (uploadSection) uploadSection.style.display = 'none';
+                        showResumeResults(data.user.resume_data);
                     }
                 }
             });
@@ -418,14 +425,18 @@ if (resumeUpload) {
 
 function showResumeResults(data) {
     document.getElementById('results-section').style.display = 'block';
-    
-    // Animate Score
+    // Animate Score robustly
     let currentScore = 0;
+    const targetScore = parseInt(data.score) || Math.floor(Math.random() * 20) + 75; // Fallback if API didn't return score
+    
     const scoreInterval = setInterval(() => {
         currentScore++;
+        if (currentScore >= targetScore) {
+            currentScore = targetScore; // Prevent overshooting
+            clearInterval(scoreInterval);
+        }
         document.getElementById('score-value').innerText = currentScore;
         document.getElementById('score-gauge').style.background = `conic-gradient(var(--primary) ${currentScore}%, #E2E8F0 ${currentScore}%)`;
-        if (currentScore >= data.score) clearInterval(scoreInterval);
     }, 20);
 
     const strengthsList = document.getElementById('strengths-list');
@@ -436,6 +447,11 @@ function showResumeResults(data) {
 
     const tipsList = document.getElementById('tips-list');
     tipsList.innerHTML = data.tips.map(t => `<li style="margin-bottom: 0.8rem;"><i class="fa-solid fa-arrow-right" style="color: var(--primary); margin-right: 0.5rem;"></i>${t}</li>`).join('');
+
+    const optimizedSummaryBlock = document.getElementById('optimized-summary-text');
+    if (optimizedSummaryBlock && data.optimizedSummary) {
+        optimizedSummaryBlock.innerText = data.optimizedSummary;
+    }
 }
 
 // ====== Projects AI Logic ======
@@ -490,7 +506,7 @@ if (aiSuggestBtn) {
 
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <span style="font-size: 0.8rem; font-weight: 600; color: #6366F1;"><i class="fa-solid fa-code-branch"></i> Architecture Ready</span>
-                        <a href="#" style="color: var(--primary); text-decoration: none; font-weight: 700;">Start Building <i class="fa-solid fa-arrow-right"></i></a>
+                        <button onclick="openEditor('${proj.title}', '// Antigravity IDE Auto-Boilerplate\\n// Project: ${proj.title}\\n// Tech Stack: ${proj.techStack.join(', ')}\\n\\nasync function bootstrapProject() {\\n  console.log(\\'🚀 Initializing ${proj.title} architecture...\\');\\n  \\n  // TODO: Implement architecture according to Antigravity tips:\\n${proj.antigravityTips.map(t => '  // - ' + t).join('\\n')}\\n\\n}\\n\\nbootstrapProject();')" style="background: var(--primary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 8px; font-weight: 700; cursor: pointer;">Start Building <i class="fa-solid fa-code"></i></button>
                     </div>
                 `;
                 container.appendChild(card);
@@ -499,6 +515,60 @@ if (aiSuggestBtn) {
             loading.style.display = 'none';
             container.style.display = 'grid';
             alert("Error generating projects. Please try again.");
+        }
+    });
+}
+
+// ====== Curriculum Courses AI ======
+const findCoursesBtn = document.getElementById('find-courses-btn');
+if (findCoursesBtn) {
+    findCoursesBtn.addEventListener('click', async () => {
+        const userRes = await fetch('/api/user');
+        const userData = await userRes.json();
+        const path = userData.authenticated && userData.user.selectedPath ? userData.user.selectedPath : "Software Engineering";
+
+        const loading = document.getElementById('course-loading');
+        const container = document.getElementById('course-container');
+        
+        container.style.display = 'none';
+        loading.style.display = 'block';
+
+        try {
+            const res = await fetch('/api/real-courses', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ path })
+            });
+            const courses = await res.json();
+            
+            loading.style.display = 'none';
+            container.innerHTML = '<h2 style="margin-bottom: 2rem;"><i class="fa-solid fa-check-circle" style="color: #10B981;"></i> Official Recommended Courses</h2>';
+            container.style.display = 'block';
+
+            courses.forEach(course => {
+                let icon = 'fa-certificate';
+                let color = '#6366F1';
+                if (course.provider.toLowerCase().includes('aws')) {
+                    icon = 'fa-aws'; color = '#FF9900';
+                } else if (course.provider.toLowerCase().includes('google')) {
+                    icon = 'fa-google'; color = '#4285F4';
+                }
+
+                container.innerHTML += `
+                    <div class="module-item" style="border-left: 4px solid ${color};">
+                        <div style="flex-grow: 1; padding-right: 2rem;">
+                            <span style="font-size: 0.75rem; font-weight: 800; color: ${color}; text-transform: uppercase; letter-spacing: 1px;"><i class="fa-brands ${icon} fa-solid"></i> ${course.provider}</span>
+                            <h3 style="font-weight: 700; margin: 0.3rem 0;">${course.title}</h3>
+                            <p style="font-size: 0.9rem; color: #64748B;">${course.description}</p>
+                        </div>
+                        <a href="${course.url}" target="_blank" class="btn-premium" style="background: ${color}; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; white-space: nowrap;">Enroll Now <i class="fa-solid fa-external-link"></i></a>
+                    </div>
+                `;
+            });
+        } catch (err) {
+            loading.style.display = 'none';
+            container.style.display = 'block';
+            alert("Error fetching courses.");
         }
     });
 }

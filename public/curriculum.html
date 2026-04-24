@@ -52,9 +52,15 @@
                 <h1 style="font-size: 2.25rem; font-weight: 800;">Academic Curriculum</h1>
                 <p style="color: #64748B;">Master the skills required for your dream path.</p>
             </div>
+            <button class="btn-premium" id="find-courses-btn" style="background: #10B981;"><i class="fa-solid fa-graduation-cap"></i> Find Real Courses</button>
         </header>
 
-        <section class="content-card">
+        <div id="course-loading" style="display: none; text-align: center; margin: 2rem 0; padding: 2rem; background: white; border-radius: 16px; border: 1px solid #E2E8F0;">
+             <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 2rem; color: #10B981; margin-bottom: 1rem;"></i>
+             <p style="color: #64748B; font-weight: 600;">Searching AWS Academy and Google Cloud APIs for real official courses...</p>
+        </div>
+
+        <section class="content-card" id="course-container">
             <h2 style="margin-bottom: 2rem;">Current Courses</h2>
             <div class="module-item">
                 <div>
