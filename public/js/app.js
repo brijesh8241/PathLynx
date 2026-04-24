@@ -370,3 +370,135 @@ function showStepDetails(mod) {
 function setupOnboardingListener() {
     // Global listener for escape or close if needed
 }
+
+// ====== Resume AI Logic ======
+const resumeUpload = document.getElementById('resume-upload');
+if (resumeUpload) {
+    resumeUpload.addEventListener('change', async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        document.getElementById('drop-zone').style.display = 'none';
+        const progressDiv = document.getElementById('upload-progress');
+        progressDiv.style.display = 'block';
+
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += Math.random() * 15;
+            if (progress > 90) progress = 90;
+            document.getElementById('progress-bar').style.width = `${progress}%`;
+        }, 500);
+
+        const formData = new FormData();
+        formData.append('resume', file);
+
+        try {
+            const res = await fetch('/api/analyze-resume', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await res.json();
+
+            clearInterval(interval);
+            document.getElementById('progress-bar').style.width = '100%';
+            
+            setTimeout(() => {
+                document.getElementById('upload-section').style.display = 'none';
+                showResumeResults(data);
+            }, 500);
+
+        } catch (err) {
+            clearInterval(interval);
+            alert("Error analyzing resume. Please try again.");
+            document.getElementById('upload-progress').style.display = 'none';
+            document.getElementById('drop-zone').style.display = 'flex';
+        }
+    });
+}
+
+function showResumeResults(data) {
+    document.getElementById('results-section').style.display = 'block';
+    
+    // Animate Score
+    let currentScore = 0;
+    const scoreInterval = setInterval(() => {
+        currentScore++;
+        document.getElementById('score-value').innerText = currentScore;
+        document.getElementById('score-gauge').style.background = `conic-gradient(var(--primary) ${currentScore}%, #E2E8F0 ${currentScore}%)`;
+        if (currentScore >= data.score) clearInterval(scoreInterval);
+    }, 20);
+
+    const strengthsList = document.getElementById('strengths-list');
+    strengthsList.innerHTML = data.strengths.map(s => `<li style="margin-bottom: 0.5rem;">${s}</li>`).join('');
+
+    const weaknessesList = document.getElementById('weaknesses-list');
+    weaknessesList.innerHTML = data.weaknesses.map(w => `<li style="margin-bottom: 0.5rem;">${w}</li>`).join('');
+
+    const tipsList = document.getElementById('tips-list');
+    tipsList.innerHTML = data.tips.map(t => `<li style="margin-bottom: 0.8rem;"><i class="fa-solid fa-arrow-right" style="color: var(--primary); margin-right: 0.5rem;"></i>${t}</li>`).join('');
+}
+
+// ====== Projects AI Logic ======
+const aiSuggestBtn = document.getElementById('ai-suggest-btn');
+if (aiSuggestBtn) {
+    aiSuggestBtn.addEventListener('click', async () => {
+        // Fetch user path
+        const userRes = await fetch('/api/user');
+        const userData = await userRes.json();
+        
+        const path = userData.authenticated && userData.user.selectedPath ? userData.user.selectedPath : "Software Engineering";
+
+        const loading = document.getElementById('ai-loading');
+        const container = document.getElementById('project-container');
+        
+        container.style.display = 'none';
+        loading.style.display = 'block';
+
+        try {
+            const res = await fetch('/api/project-guidance', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ path })
+            });
+            const projects = await res.json();
+            
+            loading.style.display = 'none';
+            container.innerHTML = '';
+            container.style.display = 'grid';
+
+            projects.forEach(proj => {
+                const card = document.createElement('div');
+                card.className = 'project-card';
+                card.innerHTML = `
+                    <span class="badge" style="background: #ECFDF5; color: #059669;"><i class="fa-solid fa-robot"></i> AI Suggested</span>
+                    <h3 style="font-weight: 800; margin-bottom: 1rem;">${proj.title}</h3>
+                    <p style="font-size: 0.9rem; color: #64748B; margin-bottom: 1rem;">${proj.description}</p>
+                    
+                    <div style="margin-bottom: 1.5rem;">
+                        <strong style="font-size: 0.8rem; color: #475569;">Tech Stack:</strong>
+                        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
+                            ${proj.techStack.map(t => `<span style="background: #F1F5F9; color: #475569; padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.75rem; font-weight: 600;">${t}</span>`).join('')}
+                        </div>
+                    </div>
+
+                    <div style="background: #1E293B; color: #E2E8F0; padding: 1rem; border-radius: 12px; margin-bottom: 1.5rem;">
+                        <h4 style="color: #38BDF8; font-size: 0.85rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-rocket"></i> Antigravity Tips</h4>
+                        <ul style="padding-left: 1.2rem; font-size: 0.8rem; line-height: 1.5; color: #CBD5E1;">
+                            ${proj.antigravityTips.map(t => `<li style="margin-bottom: 0.3rem;">${t}</li>`).join('')}
+                        </ul>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 0.8rem; font-weight: 600; color: #6366F1;"><i class="fa-solid fa-code-branch"></i> Architecture Ready</span>
+                        <a href="#" style="color: var(--primary); text-decoration: none; font-weight: 700;">Start Building <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        } catch (err) {
+            loading.style.display = 'none';
+            container.style.display = 'grid';
+            alert("Error generating projects. Please try again.");
+        }
+    });
+}

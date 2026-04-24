@@ -7,6 +7,10 @@ const path = require('path');
 const bcrypt = require('bcryptjs');
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const supabase = require('./config/supabase');
+const multer = require('multer');
+const pdfParse = require('pdf-parse');
+
+const upload = multer({ storage: multer.memoryStorage() });
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -158,6 +162,78 @@ app.post('/api/generate-roadmap', async (req, res) => {
         res.json(JSON.parse(text.replace(/```json/g, '').replace(/```/g, '').trim()));
     } catch (e) {
         res.json({ title: careerPath, modules: [{ name: "Basics of " + careerPath, status: "In Progress" }] });
+    }
+});
+
+app.post('/api/analyze-resume', upload.single('resume'), async (req, res) => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({ error: 'No file uploaded' });
+        }
+
+        const data = await pdfParse(req.file.buffer);
+        const text = data.text;
+
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const prompt = `You are an expert ATS (Applicant Tracking System) and career coach.
+Analyze the following resume text and provide a structured JSON evaluation.
+The output MUST be valid JSON, with exactly the following structure:
+{
+  "score": <number between 0 and 100>,
+  "strengths": ["...", "..."],
+  "weaknesses": ["...", "..."],
+  "tips": ["...", "..."]
+}
+Resume Text:
+${text}`;
+
+        const result = await model.generateContent(prompt);
+        const responseText = (await result.response).text();
+
+        const jsonMatch = responseText.match(/\{[\s\S]*\}/);
+        if (jsonMatch) {
+            res.json(JSON.parse(jsonMatch[0]));
+        } else {
+            res.status(500).json({ error: 'Failed to parse AI response' });
+        }
+    } catch (e) {
+        console.error('Resume Analysis Error:', e);
+        res.status(500).json({ error: 'Failed to analyze resume' });
+    }
+});
+
+app.post('/api/project-guidance', async (req, res) => {
+    try {
+        const { path } = req.body;
+        if (!path) return res.status(400).json({ error: 'Path is required' });
+
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const prompt = `You are a Senior Software Architect and Tech Lead.
+The user is focusing on the career path: "${path}".
+Suggest exactly 2 detailed, portfolio-ready project ideas for this path.
+Provide the output as a valid JSON array of objects, with exactly this structure:
+[
+  {
+    "title": "Project Title",
+    "description": "Short overview of what the project is.",
+    "techStack": ["Tech1", "Tech2"],
+    "architecture": "High-level architecture description.",
+    "antigravityTips": ["Tip 1", "Tip 2"]
+  }
+]`;
+
+        const result = await model.generateContent(prompt);
+        const responseText = (await result.response).text();
+
+        const jsonMatch = responseText.match(/\[[\s\S]*\]/);
+        if (jsonMatch) {
+            res.json(JSON.parse(jsonMatch[0]));
+        } else {
+            res.status(500).json({ error: 'Failed to parse AI response' });
+        }
+    } catch (e) {
+        console.error('Project Guidance Error:', e);
+        res.status(500).json({ error: 'Failed to generate project guidance' });
     }
 });
 
