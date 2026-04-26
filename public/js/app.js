@@ -97,7 +97,7 @@ async function checkAuthState() {
                     if (window.location.pathname.includes('resume.html') && data.user.resume_data) {
                         const uploadSection = document.getElementById('upload-section');
                         if (uploadSection) uploadSection.style.display = 'none';
-                        showResumeResults(data.user.resume_data);
+                        window.showResumeResults(data.user.resume_data);
                     }
                 }
             });
@@ -424,33 +424,106 @@ if (resumeUpload) {
 }
 
 function showResumeResults(data) {
+    // Check if enhanced version exists (from resume.html inline script)
+    if (window._resumeResultsOverride) {
+        return window._resumeResultsOverride(data);
+    }
     document.getElementById('results-section').style.display = 'block';
-    // Animate Score robustly
+    // Animate Score
     let currentScore = 0;
-    const targetScore = parseInt(data.score) || Math.floor(Math.random() * 20) + 75; // Fallback if API didn't return score
+    const targetScore = parseInt(data.score) || Math.floor(Math.random() * 20) + 75;
     
     const scoreInterval = setInterval(() => {
         currentScore++;
         if (currentScore >= targetScore) {
-            currentScore = targetScore; // Prevent overshooting
+            currentScore = targetScore;
             clearInterval(scoreInterval);
         }
-        document.getElementById('score-value').innerText = currentScore;
-        document.getElementById('score-gauge').style.background = `conic-gradient(var(--primary) ${currentScore}%, #E2E8F0 ${currentScore}%)`;
+        const scoreEl = document.getElementById('score-value');
+        if (scoreEl) scoreEl.innerText = currentScore;
+        // SVG ring support
+        const circle = document.getElementById('score-circle');
+        if (circle) {
+            const circumference = 2 * Math.PI * 80;
+            circle.style.strokeDasharray = circumference;
+            circle.style.strokeDashoffset = circumference - (currentScore / 100) * circumference;
+        }
+        // Legacy conic-gradient support
+        const gauge = document.getElementById('score-gauge');
+        if (gauge) gauge.style.background = `conic-gradient(var(--primary) ${currentScore}%, #E2E8F0 ${currentScore}%)`;
     }, 20);
 
+    // Score grade
+    const gradeEl = document.getElementById('score-grade');
+    if (gradeEl) {
+        if (targetScore >= 90) { gradeEl.textContent = '🏆 Excellent'; gradeEl.style.color = '#059669'; }
+        else if (targetScore >= 75) { gradeEl.textContent = '✅ Good'; gradeEl.style.color = '#6366F1'; }
+        else if (targetScore >= 60) { gradeEl.textContent = '⚠️ Needs Work'; gradeEl.style.color = '#F59E0B'; }
+        else { gradeEl.textContent = '❌ Critical'; gradeEl.style.color = '#DC2626'; }
+    }
+
+    // Skill bars
+    const skills = data.skillBreakdown || { keywords: targetScore - 5, formatting: targetScore + 3, impact: targetScore - 10, brevity: targetScore + 5, relevance: targetScore - 2 };
+    setTimeout(() => {
+        ['keywords', 'formatting', 'impact', 'brevity', 'relevance'].forEach(s => {
+            const key = s === 'formatting' ? 'format' : s;
+            const val = Math.min(100, Math.max(20, (skills[s] || Math.floor(Math.random() * 25) + 60)));
+            const fillEl = document.getElementById('fill-' + key);
+            const labelEl = document.getElementById('skill-' + key);
+            if (fillEl) fillEl.style.width = val + '%';
+            if (labelEl) labelEl.textContent = val + '%';
+        });
+    }, 500);
+
+    // Strengths
     const strengthsList = document.getElementById('strengths-list');
-    strengthsList.innerHTML = data.strengths.map(s => `<li style="margin-bottom: 0.5rem;">${s}</li>`).join('');
+    if (strengthsList && data.strengths) {
+        strengthsList.innerHTML = data.strengths.map(s => `<li style="margin-bottom: 0.4rem;">${s}</li>`).join('');
+    }
 
+    // Weaknesses
     const weaknessesList = document.getElementById('weaknesses-list');
-    weaknessesList.innerHTML = data.weaknesses.map(w => `<li style="margin-bottom: 0.5rem;">${w}</li>`).join('');
+    if (weaknessesList && data.weaknesses) {
+        weaknessesList.innerHTML = data.weaknesses.map(w => `<li style="margin-bottom: 0.4rem;">${w}</li>`).join('');
+    }
 
+    // Tips - support both old tips-list and new tips-container
+    const tipsContainer = document.getElementById('tips-container');
     const tipsList = document.getElementById('tips-list');
-    tipsList.innerHTML = data.tips.map(t => `<li style="margin-bottom: 0.8rem;"><i class="fa-solid fa-arrow-right" style="color: var(--primary); margin-right: 0.5rem;"></i>${t}</li>`).join('');
+    if (tipsContainer && data.tips) {
+        tipsContainer.innerHTML = '';
+        const icons = ['fa-bullseye', 'fa-chart-line', 'fa-spell-check', 'fa-link', 'fa-star'];
+        const colors = ['#6366F1', '#06B6D4', '#10B981', '#F59E0B', '#8B5CF6'];
+        data.tips.forEach((tip, i) => {
+            const card = document.createElement('div');
+            card.className = 'suggestion-card';
+            card.innerHTML = `
+                <h4><i class="fa-solid ${icons[i % icons.length]}" style="color: ${colors[i % colors.length]};"></i> Suggestion ${i + 1} <span style="margin-left: auto; font-size: 0.75rem; color: #94A3B8;" class="apply-label">Click to apply ✓</span></h4>
+                <p>${tip}</p>
+            `;
+            card.onclick = function() {
+                this.classList.toggle('applied');
+                const label = this.querySelector('.apply-label');
+                label.textContent = this.classList.contains('applied') ? 'Applied ✓' : 'Click to apply ✓';
+                label.style.color = this.classList.contains('applied') ? '#059669' : '#94A3B8';
+            };
+            tipsContainer.appendChild(card);
+        });
+    } else if (tipsList && data.tips) {
+        tipsList.innerHTML = data.tips.map(t => `<li style="margin-bottom: 0.8rem;"><i class="fa-solid fa-arrow-right" style="color: var(--primary); margin-right: 0.5rem;"></i>${t}</li>`).join('');
+    }
 
+    // Optimized Summary with typewriter
     const optimizedSummaryBlock = document.getElementById('optimized-summary-text');
     if (optimizedSummaryBlock && data.optimizedSummary) {
-        optimizedSummaryBlock.innerText = data.optimizedSummary;
+        optimizedSummaryBlock.innerText = '';
+        let charIdx = 0;
+        const typeInterval = setInterval(() => {
+            if (charIdx < data.optimizedSummary.length) {
+                optimizedSummaryBlock.innerText += data.optimizedSummary[charIdx];
+                charIdx++;
+            } else { clearInterval(typeInterval); }
+        }, 15);
     }
 }
 

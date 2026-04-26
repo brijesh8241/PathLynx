@@ -9,7 +9,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
-<body>
+<body class="noise-overlay grid-mesh-bg">
+
+    <!-- Floating Orbs -->
+    <div class="floating-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+    <!-- Particle Canvas -->
+    <canvas id="particles-canvas" class="particles-canvas"></canvas>
 
     <header>
         <div class="container-wide">
@@ -35,68 +44,91 @@
         </div>
     </header>
 
-    <section class="hero-v2 animate-up">
+    <section class="hero-v2 animate-up" style="position: relative; z-index: 1;">
         <div class="container-wide">
-            <span class="badge-v2 badge-primary">Your Dedicated Career Catalyst</span>
-            <h1>From Skills to <br><span>Dream Career</span></h1>
-            <p class="description">Stop wandering. Over 50,000 students have used PathLynx to get clear, step-by-step guidance on choosing a path, learning critical skills, and cracking big tech interviews.</p>
-            <div class="flex-center" style="gap: 1.5rem;">
-                <a href="careers.html" class="btn btn-primary">Start Your Path <i class="fa-solid fa-arrow-right"></i></a>
-                <a href="projects.html" class="btn btn-outline">Explore Projects</a>
+            <div class="grid-2" style="align-items: center;">
+                <div style="text-align: left;">
+                    <span class="badge-v2 badge-primary">Your Dedicated Career Catalyst</span>
+                    <h1 style="text-align: left; font-size: 3.5rem;">From Skills to <br><span class="gradient-text-animated">Dream Career</span></h1>
+                    <p class="description" style="text-align: left; max-width: 100%; margin-left: 0;">Stop wandering. Over 50,000 students have used PathLynx to get clear, step-by-step guidance on choosing a path, learning critical skills, and cracking big tech interviews.</p>
+                    <div style="display: flex; gap: 1.5rem; justify-content: flex-start; margin-top: 2rem;">
+                        <a href="careers.html" class="btn btn-primary hover-lift">Start Your Path <i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="projects.html" class="btn btn-outline hover-lift">Explore Projects</a>
+                    </div>
+                </div>
+                <div style="position: relative;">
+                    <div class="img-glow"></div>
+                    <div class="css-graphic-container">
+                        <div class="css-code-window">
+                            <div style="display:flex; gap:6px; margin-bottom:1rem;">
+                                <div style="width:10px;height:10px;border-radius:50%;background:#EF4444;"></div>
+                                <div style="width:10px;height:10px;border-radius:50%;background:#F59E0B;"></div>
+                                <div style="width:10px;height:10px;border-radius:50%;background:#10B981;"></div>
+                            </div>
+                            <div class="css-code-line" style="width: 100%;"></div>
+                            <div class="css-code-line" style="width: 80%;"></div>
+                            <div class="css-code-line" style="width: 60%;"></div>
+                            <div class="css-code-line" style="width: 90%;"></div>
+                            <div style="margin-top:1.5rem; opacity:0.8;">> System initialized...</div>
+                            <div style="margin-top:0.5rem; opacity:0.8;">> Building career path...</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Stat Section -->
-    <section class="section-padding-sm" style="background: white; border-bottom: 1px solid rgba(0,0,0,0.05);">
+    <section class="section-padding-sm" style="background: white; border-bottom: 1px solid rgba(0,0,0,0.05); position: relative; z-index: 1;">
         <div class="container-wide">
-            <div class="grid-4" style="text-align: center;">
-                <div>
-                    <h3 style="font-size: 3rem; color: var(--brand-primary);">95%</h3>
-                    <p style="font-weight: 600;">Placement Rate</p>
+            <div class="grid-4 stagger-children" style="text-align: center;" id="stats-section">
+                <div class="reveal stat-animate">
+                    <h3 style="font-size: 3rem; color: var(--brand-primary);" class="counter" data-target="95">0</h3>
+                    <p style="font-weight: 600;">Placement Rate %</p>
                 </div>
-                <div>
-                    <h3 style="font-size: 3rem; color: var(--brand-secondary);">100+</h3>
-                    <p style="font-weight: 600;">Project Blueprints</p>
+                <div class="reveal stat-animate">
+                    <h3 style="font-size: 3rem; color: var(--brand-secondary);" class="counter" data-target="100">0</h3>
+                    <p style="font-weight: 600;">Project Blueprints+</p>
                 </div>
-                <div>
-                    <h3 style="font-size: 3rem; color: var(--brand-accent);">4</h3>
+                <div class="reveal stat-animate">
+                    <h3 style="font-size: 3rem; color: var(--brand-accent);" class="counter" data-target="4">0</h3>
                     <p style="font-weight: 600;">Major Branches</p>
                 </div>
-                <div>
-                    <h3 style="font-size: 3rem; color: var(--brand-success);">50k+</h3>
-                    <p style="font-weight: 600;">Active Users</p>
+                <div class="reveal stat-animate">
+                    <h3 style="font-size: 3rem; color: var(--brand-success);" class="counter" data-target="50000">0</h3>
+                    <p style="font-weight: 600;">Active Users+</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Core Features -->
-    <section class="section-padding">
+    <section class="section-padding" style="position: relative; z-index: 1; background: url('img/network_nodes.png') center/cover no-repeat fixed; margin-top: 2rem;">
+        <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, var(--main-bg) 0%, rgba(15,23,42,0.85) 50%, var(--main-bg) 100%); z-index: -1;"></div>
         <div class="container-wide">
-            <div class="section-head" style="text-align: center; margin-bottom: 4rem;">
+            <div class="section-head reveal" style="text-align: center; margin-bottom: 4rem;">
                 <span class="badge-v2 badge-secondary">Core Advantages</span>
                 <h2>Everything you need to succeed</h2>
                 <p>We bridge the massive gap between what colleges teach and what the industry demands.</p>
             </div>
             
-            <div class="grid-4">
-                <div class="glass-card">
+            <div class="grid-4 stagger-children">
+                <div class="glass-card reveal hover-lift hover-glow">
                     <div class="card-icon"><i class="fa-solid fa-map-location-dot"></i></div>
                     <h3>Career Roadmaps</h3>
                     <p>Analyze industry trends and provide semester-by-semester roadmaps for major engineering branches.</p>
                 </div>
-                <div class="glass-card">
+                <div class="glass-card reveal hover-lift hover-glow">
                     <div class="card-icon"><i class="fa-solid fa-file-invoice"></i></div>
                     <h3>ATS Resume Builder</h3>
                     <p>Learn how to craft a 1-page resume that passes strict Applicant Tracking Systems using the XYZ formula.</p>
                 </div>
-                <div class="glass-card">
+                <div class="glass-card reveal hover-lift hover-glow">
                     <div class="card-icon"><i class="fa-solid fa-code"></i></div>
                     <h3>Domain Projects</h3>
                     <p>Build scalable microservices and IoT smart devices that showcase your practical expertise to recruiters.</p>
                 </div>
-                <div class="glass-card">
+                <div class="glass-card reveal hover-lift hover-glow">
                     <div class="card-icon"><i class="fa-solid fa-building"></i></div>
                     <h3>Technical Pipeline</h3>
                     <p>Demystify the hiring process of FAANG companies. Know exactly how to clear every technical stage.</p>
@@ -106,14 +138,14 @@
     </section>
 
     <!-- Success Stories -->
-    <section class="section-padding" style="background: rgba(99, 102, 241, 0.03);">
+    <section class="section-padding" style="background: rgba(99, 102, 241, 0.03); position: relative; z-index: 1;">
         <div class="container-wide">
-            <div class="section-head" style="text-align: center; margin-bottom: 4rem;">
+            <div class="section-head reveal" style="text-align: center; margin-bottom: 4rem;">
                 <span class="badge-v2 badge-success">Success Stories</span>
                 <h2>Alumni Achievements</h2>
             </div>
             <div class="grid-2">
-                <div class="glass-card" style="padding: 3rem;">
+                <div class="glass-card reveal-left hover-lift" style="padding: 3rem;">
                     <p style="font-style: italic; font-size: 1.1rem; margin-bottom: 2rem; color: var(--text-main); line-height: 1.8;">"I was a mechanical engineer with no coding experience. PathLynx guided me till I deployed scalable cloud infrastructure. I'm now an SDE at Amazon."</p>
                     <div style="display: flex; align-items: center; gap: 1.2rem;">
                         <div class="profile-icon" style="background: var(--brand-primary); color: white; border: none; font-weight: bold;">R</div>
@@ -123,7 +155,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="glass-card" style="padding: 3rem;">
+                <div class="glass-card reveal-right hover-lift" style="padding: 3rem;">
                     <p style="font-style: italic; font-size: 1.1rem; margin-bottom: 2rem; color: var(--text-main); line-height: 1.8;">"The Resume Guide is incredibly accurate. I changed my bullet points to match the XYZ formula, and my callback rate tripled in just two weeks."</p>
                     <div style="display: flex; align-items: center; gap: 1.2rem;">
                         <div class="profile-icon" style="background: var(--brand-secondary); color: white; border: none; font-weight: bold;">M</div>
@@ -138,6 +170,75 @@
     </section>
 
     <script src="js/app.js"></script>
+    <!-- Particle & Scroll Animations -->
+    <script>
+    // Particle system
+    (function() {
+        const canvas = document.getElementById('particles-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const particles = [];
+        const count = 60;
+        for (let i = 0; i < count; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: Math.random() * 2 + 0.5,
+                dx: (Math.random() - 0.5) * 0.5,
+                dy: (Math.random() - 0.5) * 0.5,
+                o: Math.random() * 0.3 + 0.05
+            });
+        }
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p, i) => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(99, 102, 241, ${p.o})`;
+                ctx.fill();
+                p.x += p.dx; p.y += p.dy;
+                if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+                // Draw connections
+                for (let j = i + 1; j < particles.length; j++) {
+                    const p2 = particles[j];
+                    const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+                    if (dist < 120) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.strokeStyle = `rgba(99, 102, 241, ${0.06 * (1 - dist / 120)})`;
+                        ctx.stroke();
+                    }
+                }
+            });
+            requestAnimationFrame(draw);
+        }
+        draw();
+        window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
+    })();
+
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => observer.observe(el));
+
+    // Counter animation
+    document.querySelectorAll('.counter').forEach(el => {
+        const target = parseInt(el.dataset.target);
+        let current = 0;
+        const step = Math.max(1, Math.floor(target / 60));
+        const timer = setInterval(() => {
+            current += step;
+            if (current >= target) { current = target; clearInterval(timer); }
+            el.textContent = current >= 1000 ? (current / 1000).toFixed(0) + 'k+' : current;
+        }, 30);
+    });
+    </script>
 </body>
 
 </html>

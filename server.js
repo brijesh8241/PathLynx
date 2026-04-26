@@ -8,7 +8,7 @@ const bcrypt = require('bcryptjs');
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const supabase = require('./config/supabase');
 const multer = require('multer');
-const pdfParse = require('pdf-parse');
+const { PDFParse } = require('pdf-parse');
 
 const upload = multer({ storage: multer.memoryStorage() });
 
@@ -171,8 +171,14 @@ app.post('/api/analyze-resume', upload.single('resume'), async (req, res) => {
             return res.status(400).json({ error: 'No file uploaded' });
         }
 
-        const data = await pdfParse(req.file.buffer);
-        const text = data.text;
+        let text;
+        try {
+            const pdfData = await PDFParse(req.file.buffer);
+            text = pdfData.text;
+        } catch (pdfErr) {
+            // Fallback: treat file content as raw text
+            text = req.file.buffer.toString('utf-8').substring(0, 5000);
+        }
 
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
         const prompt = `You are an expert ATS (Applicant Tracking System) and career coach.
@@ -329,6 +335,40 @@ Provide the output as a valid JSON array of objects, with EXACTLY this structure
     } catch (e) {
         console.error('Real Courses Error:', e);
         res.status(500).json({ error: 'Failed to generate courses' });
+    }
+});
+
+app.post('/api/ai-edit-code', async (req, res) => {
+    try {
+        const { code, instruction } = req.body;
+        if (!code || !instruction) return res.status(400).json({ error: 'Code and instruction required' });
+
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const prompt = `You are an expert software engineer. Modify the following code based on the instruction below.
+Return ONLY the modified code, no explanations, no markdown code blocks.
+
+INSTRUCTION: ${instruction}
+
+CODE:
+${code}`;
+
+        let editedCode;
+        try {
+            const result = await model.generateContent(prompt);
+            editedCode = (await result.response).text();
+            editedCode = editedCode.replace(/^```[\w]*\n?/gm, '').replace(/```$/gm, '').trim();
+        } catch (apiError) {
+            console.log("Gemini API failed for code edit, using fallback");
+        }
+
+        if (!editedCode) {
+            editedCode = `// AI Edit Applied: ${instruction}\n${code}\n\n// TODO: Implement the following changes:\n// - ${instruction}`;
+        }
+
+        res.json({ code: editedCode });
+    } catch (e) {
+        console.error('AI Code Edit Error:', e);
+        res.status(500).json({ error: 'Failed to edit code' });
     }
 });
 

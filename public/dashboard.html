@@ -28,12 +28,15 @@
         /* Sidebar Styling */
         .sidebar {
             width: 280px;
+            min-width: 280px;
+            flex-shrink: 0;
             background: var(--sidebar-bg);
             color: white;
             display: flex;
             flex-direction: column;
             padding: 2rem;
             transition: all 0.3s ease;
+            overflow: visible;
         }
 
         .nav-link {

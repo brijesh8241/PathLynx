@@ -10,7 +10,7 @@
     <style>
         :root { --sidebar-bg: #0F172A; --main-bg: #F8FAFC; --card-bg: #FFFFFF; --primary: #6366F1; --primary-hover: #4F46E5; }
         body { background: var(--main-bg); height: 100vh; overflow: hidden; display: flex; font-family: 'Outfit', sans-serif; color: #1E293B; }
-        .sidebar { width: 280px; background: var(--sidebar-bg); color: white; display: flex; flex-direction: column; padding: 2rem; }
+        .sidebar { width: 280px; min-width: 280px; flex-shrink: 0; background: var(--sidebar-bg); color: white; display: flex; flex-direction: column; padding: 2rem; overflow: visible; z-index: 10; }
         .nav-link { display: flex; align-items: center; gap: 1rem; padding: 0.85rem 1.25rem; border-radius: 12px; color: #94A3B8; font-weight: 500; transition: all 0.3s ease; text-decoration: none; margin-bottom: 0.5rem; }
         .nav-link:hover, .nav-link.active { background: rgba(255, 255, 255, 0.08); color: white; }
         .nav-link.active { background: var(--primary); box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3); }

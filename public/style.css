@@ -84,8 +84,8 @@ p {
   padding: 0 2rem;
 }
 
-.section-padding { padding: 8rem 0; }
-.section-padding-sm { padding: 4rem 0; }
+.section-padding { padding: 5rem 0; }
+.section-padding-sm { padding: 3rem 0; }
 
 .flex-center {
   display: flex;
@@ -340,7 +340,7 @@ nav ul li a:hover::after, nav ul li a.active::after {
 
 /* Page Header / Hero */
 .hero-v2 {
-  padding: 10rem 0 8rem;
+  padding: 5rem 0 4rem;
   background: radial-gradient(circle at 70% 30%, rgba(99, 102, 241, 0.05) 0%, transparent 50%),
               radial-gradient(circle at 30% 70%, rgba(6, 182, 212, 0.05) 0%, transparent 50%);
   text-align: center;
@@ -491,3 +491,363 @@ nav ul li a:hover::after, nav ul li a.active::after {
 }
 
 .social-btn-v2:hover { background: #f8fafc; }
+
+/* ========== GLOBAL ANIMATIONS & GRAPHICS ========== */
+
+/* Floating Orbs Background */
+.floating-orbs {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+  animation: orbFloat 20s ease-in-out infinite;
+}
+
+.orb-1 { width: 400px; height: 400px; background: var(--brand-primary); top: -10%; left: -5%; animation-delay: 0s; }
+.orb-2 { width: 300px; height: 300px; background: var(--brand-secondary); top: 60%; right: -5%; animation-delay: -7s; }
+.orb-3 { width: 250px; height: 250px; background: var(--brand-accent); bottom: -10%; left: 40%; animation-delay: -14s; }
+
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(30px, -40px) scale(1.05); }
+  50% { transform: translate(-20px, 20px) scale(0.95); }
+  75% { transform: translate(15px, 35px) scale(1.02); }
+}
+
+/* Particle Canvas Overlay */
+.particles-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Scroll Reveal Animations */
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.2); }
+  50% { box-shadow: 0 0 40px rgba(99, 102, 241, 0.4); }
+}
+
+@keyframes borderGlow {
+  0%, 100% { border-color: rgba(99, 102, 241, 0.3); }
+  50% { border-color: rgba(99, 102, 241, 0.7); }
+}
+
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-left { opacity: 0; transform: translateX(-40px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+.reveal-right { opacity: 0; transform: translateX(40px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+.reveal-scale { opacity: 0; transform: scale(0.9); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal-scale.visible { opacity: 1; transform: scale(1); }
+
+/* Stagger delays for children */
+.stagger-children > *:nth-child(1) { transition-delay: 0.05s; }
+.stagger-children > *:nth-child(2) { transition-delay: 0.1s; }
+.stagger-children > *:nth-child(3) { transition-delay: 0.15s; }
+.stagger-children > *:nth-child(4) { transition-delay: 0.2s; }
+.stagger-children > *:nth-child(5) { transition-delay: 0.25s; }
+.stagger-children > *:nth-child(6) { transition-delay: 0.3s; }
+
+/* Gradient text animation */
+.gradient-text-animated {
+  background: linear-gradient(270deg, var(--brand-primary), var(--brand-secondary), var(--brand-accent), var(--brand-primary));
+  background-size: 600% 600%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradientShift 6s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Hover micro-interactions */
+.hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.hover-lift:hover { transform: translateY(-8px); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.15); }
+
+.hover-glow { transition: box-shadow 0.3s ease; }
+.hover-glow:hover { box-shadow: 0 0 30px var(--brand-primary-glow); }
+
+/* Loading shimmer effect */
+.shimmer-bg {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Stat counter animation */
+.stat-animate { animation: countUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+/* Grid mesh background */
+.grid-mesh-bg {
+  background-image:
+    linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Noise texture overlay */
+.noise-overlay::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  opacity: 0.02;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Image Enhancements */
+.hero-img-container {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.hero-img-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(99,102,241,0.2), transparent);
+  pointer-events: none;
+}
+
+.img-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(99,102,241,0.3) 0%, transparent 70%);
+  z-index: -1;
+  filter: blur(40px);
+}
+
+.floating-img {
+  animation: orbFloat 6s ease-in-out infinite;
+}
+
+/* =========================================================
+   PURE CSS 3D GRAPHICS & ANIMATIONS
+   ========================================================= */
+
+.css-graphic-container {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  perspective: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 1. Floating Code Window (Index) */
+.css-code-window {
+  width: 320px;
+  height: 220px;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 16px;
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5), 0 0 30px rgba(99, 102, 241, 0.2);
+  transform: rotateX(15deg) rotateY(-15deg);
+  transform-style: preserve-3d;
+  animation: float3D 8s ease-in-out infinite;
+  padding: 1.5rem;
+  text-align: left;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.75rem;
+  color: #38BDF8;
+}
+
+.css-code-window::before {
+  content: '';
+  position: absolute;
+  top: -10px; left: -10px; right: -10px; bottom: -10px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(99,102,241,0.4), transparent);
+  z-index: -1;
+  transform: translateZ(-20px);
+  filter: blur(15px);
+}
+
+.css-code-line {
+  height: 8px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  background: rgba(255,255,255,0.1);
+  overflow: hidden;
+  position: relative;
+}
+
+.css-code-line::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; height: 100%;
+  background: var(--brand-primary);
+  width: 100%;
+  transform-origin: left;
+  animation: typeCode 3s ease-in-out infinite alternate;
+}
+
+.css-code-line:nth-child(2)::after { background: var(--brand-secondary); animation-delay: 0.5s; width: 80%; }
+.css-code-line:nth-child(3)::after { background: var(--brand-success); animation-delay: 1s; width: 60%; }
+.css-code-line:nth-child(4)::after { background: var(--brand-accent); animation-delay: 1.5s; width: 90%; }
+
+/* 2. Radar Rings (Careers) */
+.css-radar {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  border: 2px dashed rgba(6, 182, 212, 0.3);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotateX(60deg) rotateZ(0deg);
+  animation: spinRadar 15s linear infinite;
+  transform-style: preserve-3d;
+}
+
+.css-radar::before, .css-radar::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid rgba(99, 102, 241, 0.4);
+}
+
+.css-radar::before { width: 150px; height: 150px; animation: pulseRing 3s ease-out infinite; }
+.css-radar::after { width: 50px; height: 50px; background: var(--brand-primary); box-shadow: 0 0 20px var(--brand-primary); animation: pulseRing 3s ease-out infinite 1.5s; }
+
+.css-radar-node {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: var(--brand-secondary);
+  border-radius: 50%;
+  box-shadow: 0 0 15px var(--brand-secondary);
+  top: 10%; left: 50%;
+  transform: translate(-50%, -50%) rotateX(-60deg);
+}
+
+/* 3. Speech Bubbles (Interview) */
+.css-bubble {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 1.5rem;
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+  animation: floatBounce 4s ease-in-out infinite;
+  color: white;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.css-bubble-1 { top: 20%; left: 10%; border-bottom-left-radius: 0; border-color: rgba(99, 102, 241, 0.5); }
+.css-bubble-2 { bottom: 20%; right: 10%; border-bottom-right-radius: 0; border-color: rgba(16, 185, 129, 0.5); animation-delay: 2s; }
+
+/* 4. Orbiting Network (Blog) */
+.css-orbit-center {
+  width: 60px; height: 60px;
+  background: var(--brand-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 30px var(--brand-primary);
+  position: relative;
+}
+
+.css-orbit-path {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 200px; height: 200px;
+  margin-top: -100px; margin-left: -100px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 50%;
+  animation: spinRadar 10s linear infinite;
+}
+
+.css-orbit-node {
+  position: absolute;
+  width: 20px; height: 20px;
+  background: var(--brand-secondary);
+  border-radius: 50%;
+  top: -10px; left: 90px;
+  box-shadow: 0 0 15px var(--brand-secondary);
+}
+
+/* Keyframes for CSS Graphics */
+@keyframes float3D {
+  0%, 100% { transform: rotateX(15deg) rotateY(-15deg) translateY(0); }
+  50% { transform: rotateX(10deg) rotateY(-10deg) translateY(-20px); }
+}
+
+@keyframes typeCode {
+  0% { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+
+@keyframes spinRadar {
+  100% { transform: rotateX(60deg) rotateZ(360deg); }
+}
+
+@keyframes pulseRing {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+@keyframes floatBounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-15px) scale(1.02); }
+}

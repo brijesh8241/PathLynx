@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
-<body>
+<body class="noise-overlay grid-mesh-bg">
+    <div class="floating-orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
+    <canvas id="particles-canvas" class="particles-canvas"></canvas>
 
     <header>
         <div class="container-wide">
@@ -37,9 +39,23 @@
 
     <section class="hero-v2 animate-up">
         <div class="container-wide">
-            <span class="badge-v2 badge-primary">Deep Dive</span>
-            <h1>Branch-Wise <br><span>Career Guide</span></h1>
-            <p class="description">A comprehensive exploration of learning roadmaps, top skills, and high-growth roles across major engineering domains.</p>
+            <div class="grid-2" style="align-items: center;">
+                <div style="text-align: left;">
+                    <span class="badge-v2 badge-primary">Deep Dive</span>
+                    <h1 style="text-align: left;">Branch-Wise <br><span class="gradient-text-animated">Career Guide</span></h1>
+                    <p class="description" style="text-align: left; max-width: 100%; margin-left: 0;">A comprehensive exploration of learning roadmaps, top skills, and high-growth roles across major engineering domains.</p>
+                </div>
+                <div style="position: relative;">
+                    <div class="img-glow"></div>
+                    <div class="css-graphic-container">
+                        <div class="css-radar">
+                            <div class="css-radar-node"></div>
+                            <div class="css-radar-node" style="top: 80%; left: 20%; background: #10B981; box-shadow: 0 0 15px #10B981; animation-delay: 1s;"></div>
+                            <div class="css-radar-node" style="top: 40%; left: 80%; background: #8B5CF6; box-shadow: 0 0 15px #8B5CF6; animation-delay: 2s;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -55,7 +71,7 @@
             <div class="timeline-v2">
                 <div class="timeline-item-v2">
                     <div class="timeline-dot-v2"></div>
-                    <div class="glass-card">
+                    <div class="glass-card reveal hover-lift">
                         <h3>Years 1 & 2: Fundamentals & Logic</h3>
                         <p><b>Core:</b> C/C++, Python, Java. Master Data Structures & Algorithms, OOPs, and DBMS. Focus on problem-solving comfort on platforms like LeetCode.</p>
                     </div>
@@ -257,6 +273,27 @@
     </section>
 
     <script src="js/app.js"></script>
+    <script>
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => observer.observe(el));
+
+    // Particles
+    (function() {
+        const c = document.getElementById('particles-canvas'); if (!c) return;
+        const ctx = c.getContext('2d'); c.width = innerWidth; c.height = innerHeight;
+        const pts = Array.from({length: 40}, () => ({x:Math.random()*c.width, y:Math.random()*c.height, r:Math.random()*1.5+0.5, dx:(Math.random()-0.5)*0.4, dy:(Math.random()-0.5)*0.4, o:Math.random()*0.2+0.05}));
+        (function draw() {
+            ctx.clearRect(0,0,c.width,c.height);
+            pts.forEach(p => { ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle=`rgba(99,102,241,${p.o})`; ctx.fill(); p.x+=p.dx; p.y+=p.dy; if(p.x<0||p.x>c.width)p.dx*=-1; if(p.y<0||p.y>c.height)p.dy*=-1; });
+            requestAnimationFrame(draw);
+        })();
+        addEventListener('resize', () => { c.width=innerWidth; c.height=innerHeight; });
+    })();
+    </script>
 </body>
 
 </html>
