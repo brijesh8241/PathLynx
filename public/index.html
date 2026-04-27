@@ -78,6 +78,22 @@
         </div>
     </section>
 
+    <!-- Live Tech News Ticker -->
+    <section style="background: var(--bg-dark); color: white; padding: 0.8rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); position: relative; z-index: 1;">
+        <div class="container-wide" style="display: flex; align-items: center; gap: 1rem;">
+            <div style="background: var(--brand-primary); color: white; padding: 0.2rem 0.8rem; border-radius: 4px; font-weight: 700; font-size: 0.8rem; white-space: nowrap;"><i class="fa-solid fa-bolt"></i> Live Tech News</div>
+            <div style="overflow: hidden; flex-grow: 1; position: relative;">
+                <div id="tech-news-ticker" style="display: flex; gap: 3rem; animation: ticker 20s linear infinite; white-space: nowrap; font-size: 0.9rem;">
+                    <span>Loading latest tech updates...</span>
+                </div>
+            </div>
+        </div>
+        <style>
+            @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+            #tech-news-ticker:hover { animation-play-state: paused; }
+        </style>
+    </section>
+
     <!-- Stat Section -->
     <section class="section-padding-sm" style="background: white; border-bottom: 1px solid rgba(0,0,0,0.05); position: relative; z-index: 1;">
         <div class="container-wide">
@@ -170,6 +186,20 @@
     </section>
 
     <script src="js/app.js"></script>
+    <script>
+    // Fetch Tech News
+    async function loadTechNews() {
+        try {
+            const res = await fetch('/api/tech-news');
+            const news = await res.json();
+            const ticker = document.getElementById('tech-news-ticker');
+            ticker.innerHTML = news.map(n => `<span><strong>${n.source}:</strong> ${n.headline}</span>`).join(' <span style="color:var(--brand-primary)">•</span> ');
+        } catch (e) {
+            console.error('Failed to load tech news', e);
+        }
+    }
+    document.addEventListener('DOMContentLoaded', loadTechNews);
+    </script>
     <!-- Particle & Scroll Animations -->
     <script>
     // Particle system

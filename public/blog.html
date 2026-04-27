@@ -63,59 +63,122 @@
         </div>
     </section>
 
-    <section class="section-padding">
+    <!-- Featured Insight Hero -->
+    <section class="section-padding" style="background: var(--bg-dark); color: white; padding-top: 2rem;">
         <div class="container-wide">
-            <div class="section-head" style="text-align: center; margin-bottom: 4rem;">
-                <span class="badge-v2 badge-secondary">Recruitment Loop</span>
-                <h2>The Standard Pipeline</h2>
-            </div>
-            
-            <div class="timeline-v2">
-                <div class="timeline-item-v2">
-                    <div class="timeline-dot-v2"></div>
-                    <div class="glass-card reveal hover-lift">
-                        <h3>1. Sourcing & Application</h3>
-                        <p style="margin-top: 1rem;"><b>On-Campus:</b> Direct university visits.<br>
-                        <b>Off-Campus:</b> Career portals and LinkedIn. Referrals are key—they often guarantee a human eye on your resume.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item-v2">
-                    <div class="timeline-dot-v2"></div>
-                    <div class="glass-card">
-                        <h3>2. Online Assessment (OA)</h3>
-                        <p style="margin-top: 1rem;">Automated coding challenge (60-90 mins). Typically 2-4 algorithmic problems. Tests raw speed and DS familiarity.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item-v2">
-                    <div class="timeline-dot-v2"></div>
-                    <div class="glass-card">
-                        <h3>3. Technical Interviews</h3>
-                        <p style="margin-top: 1rem;"><b>DSA Focus:</b> Live coding on whiteboard/shared editor. Evaluates thought process, communication, and optimization skills.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item-v2">
-                    <div class="timeline-dot-v2"></div>
-                    <div class="glass-card">
-                        <h3>4. Behavioral / HR Round</h3>
-                        <p style="margin-top: 1rem;">Evaluates cultural fit using the <b>STAR method</b>. Focuses on leadership, conflict resolution, and long-term vision.</p>
+            <div style="background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(15,23,42,1)); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; padding: 3rem; position: relative; overflow: hidden; margin-bottom: 3rem; box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
+                <div style="position: absolute; top: 0; right: 0; width: 50%; height: 100%; background: radial-gradient(circle at top right, rgba(99,102,241,0.2), transparent 70%); pointer-events: none;"></div>
+                <span class="badge" style="background: var(--brand-primary); color: white; padding: 0.4rem 1rem; border-radius: 20px; font-weight: 700; font-size: 0.8rem; margin-bottom: 1.5rem; display: inline-block; box-shadow: 0 4px 10px rgba(99,102,241,0.3);">🔥 Editor's Choice</span>
+                <h2 style="font-size: 2.8rem; font-weight: 900; line-height: 1.2; margin-bottom: 1.5rem; max-width: 800px; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">The Future of Tech Recruitment: How AI is Rewriting the Rules of Hiring</h2>
+                <p style="font-size: 1.1rem; color: #94A3B8; margin-bottom: 2rem; max-width: 600px; line-height: 1.6;">Discover the latest shifts in ATS screening, generative AI technical assessments, and what top-tier engineering managers are actually looking for in 2026.</p>
+                
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+                    <img src="https://i.pravatar.cc/100?img=47" style="width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--brand-primary);">
+                    <div>
+                        <p style="font-weight: 700; font-size: 0.95rem; margin: 0; color: white;">Dr. Elena Rostova</p>
+                        <p style="font-size: 0.8rem; color: #64748B; margin: 0;">Ex-Director of Talent, Meta • Oct 15, 2026</p>
                     </div>
                 </div>
                 
-                <div class="timeline-item-v2" style="margin-bottom: 0;">
-                    <div class="timeline-dot-v2"></div>
-                    <div class="glass-card">
-                        <h3>5. The Offer</h3>
-                        <p style="margin-top: 1rem;">Review by the hiring committee follows. Successful candidates receive a package including Base, Bonus, and RSUs.</p>
+                <a href="blog.html" class="btn-premium" style="text-decoration: none; display: inline-flex;"><i class="fa-solid fa-book-open"></i> Read Full Insight</a>
+            </div>
+
+            <!-- Main Blog Area -->
+            <div style="display: grid; grid-template-columns: 3fr 1fr; gap: 3rem;">
+                
+                <!-- Dynamic Feed -->
+                <div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">
+                        <h3 style="font-size: 1.5rem; font-weight: 800;">Latest Intelligence</h3>
+                        <div style="display: flex; gap: 0.5rem; overflow-x: auto; padding-bottom: 0.5rem;">
+                            <button style="background: rgba(255,255,255,0.1); border: 1px solid transparent; color: white; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.8rem; cursor: pointer; white-space: nowrap;">For You</button>
+                            <button style="background: transparent; border: 1px solid rgba(255,255,255,0.2); color: white; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.8rem; cursor: pointer; white-space: nowrap;">Architecture</button>
+                            <button style="background: transparent; border: 1px solid rgba(255,255,255,0.2); color: white; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.8rem; cursor: pointer; white-space: nowrap;">Interviews</button>
+                        </div>
+                    </div>
+
+                    <div id="blog-posts-container" style="display: grid; gap: 2rem;">
+                        <!-- Loader -->
+                        <div style="text-align: center; padding: 4rem; background: rgba(255,255,255,0.02); border-radius: 16px; border: 1px dashed rgba(255,255,255,0.1);">
+                            <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 3rem; color: var(--brand-primary); margin-bottom: 1rem;"></i>
+                            <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Curating the latest insights...</h3>
+                            <p style="color: #64748B; font-size: 0.9rem;">Connecting to PathLynx Intelligence Network</p>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Sidebar -->
+                <div>
+                    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 2rem; position: sticky; top: 100px;">
+                        <h4 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.8rem;"><i class="fa-solid fa-fire" style="color: #F59E0B;"></i> Trending Topics</h4>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.6rem;">
+                            <span style="background: rgba(99,102,241,0.1); color: #818CF8; padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.8rem; cursor: pointer;">#AI_Recruitment</span>
+                            <span style="background: rgba(16,185,129,0.1); color: #34D399; padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.8rem; cursor: pointer;">#SystemDesign</span>
+                            <span style="background: rgba(245,158,11,0.1); color: #FBBF24; padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.8rem; cursor: pointer;">#LeetCode</span>
+                            <span style="background: rgba(236,72,153,0.1); color: #F472B6; padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.8rem; cursor: pointer;">#Microservices</span>
+                            <span style="background: rgba(255,255,255,0.05); color: #CBD5E1; padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.8rem; cursor: pointer;">#Behavioral</span>
+                        </div>
+
+                        <div style="margin-top: 3rem;">
+                            <h4 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.8rem;"><i class="fa-solid fa-envelope" style="color: var(--brand-primary);"></i> Weekly Intelligence</h4>
+                            <p style="font-size: 0.85rem; color: #94A3B8; margin-bottom: 1rem;">Get exclusive insights delivered directly to your inbox.</p>
+                            <input type="email" placeholder="Your work email" style="width: 100%; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); padding: 0.8rem 1rem; border-radius: 8px; color: white; margin-bottom: 1rem; font-family: inherit;">
+                            <button class="btn-premium" style="width: 100%; justify-content: center;">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
     <script src="js/app.js"></script>
+    <script>
+    // Fetch Dynamic Blog Posts
+    async function loadBlogPosts() {
+        try {
+            const res = await fetch('/api/blog-posts');
+            const posts = await res.json();
+            const container = document.getElementById('blog-posts-container');
+            container.innerHTML = '';
+            
+            posts.forEach((post, index) => {
+                const tagsHtml = post.tags ? post.tags.map(t => `<span style="background: rgba(255,255,255,0.05); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.7rem; color: #CBD5E1; margin-right: 0.5rem; display: inline-block; margin-bottom: 0.5rem;">#${t}</span>`).join('') : '';
+                
+                const html = `
+                <div class="reveal hover-lift" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 2rem; transition: all 0.3s ease; animation-delay: ${index * 0.1}s;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 0.8rem; color: #64748B;">
+                        <span style="color: var(--brand-primary); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">${post.category || 'Tech Trends'}</span>
+                        <span><i class="fa-regular fa-clock"></i> ${post.readTime}</span>
+                    </div>
+                    <h3 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 1rem; line-height: 1.3;"><a href="blog.html" style="color: white; text-decoration: none;">${post.title}</a></h3>
+                    <p style="color: #94A3B8; font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">${post.excerpt}</p>
+                    
+                    ${tagsHtml ? `<div style="margin-bottom: 1.5rem;">${tagsHtml}</div>` : ''}
+
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 1rem;">
+                        <div style="display: flex; align-items: center; gap: 0.8rem;">
+                            <div style="width: 35px; height: 35px; background: var(--brand-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.8rem;">${post.author.charAt(0)}</div>
+                            <span style="font-size: 0.85rem; font-weight: 600;">${post.author}</span>
+                        </div>
+                        <span style="font-size: 0.8rem; color: #64748B;">${post.date}</span>
+                    </div>
+                </div>
+                `;
+                container.innerHTML += html;
+            });
+            
+            // Re-initialize scroll reveal for new elements
+            const revealEls = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.15 });
+            revealEls.forEach(el => observer.observe(el));
+        } catch (e) {
+            console.error('Failed to load blog posts', e);
+        }
+    }
+    
+    document.addEventListener('DOMContentLoaded', loadBlogPosts);
+    </script>
     <script>
     const revealEls = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.15 });

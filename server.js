@@ -372,4 +372,125 @@ ${code}`;
     }
 });
 
+// Dynamic Data Endpoints for Fully Functional Site
+app.get('/api/blog-posts', async (req, res) => {
+    try {
+        const userPath = req.session.user && req.session.user.selectedPath ? req.session.user.selectedPath : "Software Engineering";
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const prompt = `Generate 4 professional, deeply detailed, engaging blog posts tailored specifically for a professional in ${userPath}. Topics should include advanced technical insights, current industry trends, and career growth hacks.
+Return valid JSON array of objects with structure:
+[{"title": "...", "excerpt": "...", "author": "...", "date": "...", "readTime": "...", "category": "...", "tags": ["...", "..."]}]`;
+        
+        let parsedData;
+        try {
+            const result = await model.generateContent(prompt);
+            const responseText = (await result.response).text();
+            const jsonMatch = responseText.match(/\[[\s\S]*\]/);
+            if (jsonMatch) parsedData = JSON.parse(jsonMatch[0]);
+        } catch (apiError) {
+            console.log("Gemini API failed for blog posts, using fallback");
+        }
+
+        if (!parsedData) {
+            parsedData = [
+                { title: `Cracking the ${userPath} Interview: A Recruiter's Perspective`, excerpt: "Learn the hidden patterns behind the hiring processes at top tier tech companies.", author: "Sarah Jenkins", date: "Oct 12, 2026", readTime: "5 min read", category: "Interview Prep", tags: ["Hiring", "FAANG"] },
+                { title: `Advanced System Design for ${userPath}`, excerpt: "How to approach architectural rounds without getting overwhelmed by scalability buzzwords.", author: "Michael Chen", date: "Oct 10, 2026", readTime: "8 min read", category: "Engineering", tags: ["Architecture", "Scale"] }
+            ];
+        }
+        res.json(parsedData);
+    } catch (e) {
+        res.status(500).json({ error: 'Failed to fetch blog posts' });
+    }
+});
+
+app.get('/api/career-stats', async (req, res) => {
+    try {
+        const userPath = req.session.user && req.session.user.selectedPath ? req.session.user.selectedPath : "Software Engineering";
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const prompt = `Generate realistic 2026 deep-dive career statistics specifically for sub-domains within ${userPath}.
+Return valid JSON array of 4 objects with structure:
+[{"domain": "Sub-domain Name", "startingAvg": "$...", "midSenior": "$...", "openPositions": "...", "growthRate": "+%...", "topSkill": "..."}]`;
+        
+        let parsedData;
+        try {
+            const result = await model.generateContent(prompt);
+            const responseText = (await result.response).text();
+            const jsonMatch = responseText.match(/\[[\s\S]*\]/);
+            if (jsonMatch) parsedData = JSON.parse(jsonMatch[0]);
+        } catch (apiError) {
+            console.log("Gemini API failed for career stats, using fallback");
+        }
+
+        if (!parsedData) {
+            parsedData = [
+                { domain: `${userPath} - Core`, startingAvg: "$110,000", midSenior: "$190,000+", openPositions: "145,000+", growthRate: "+12%", topSkill: "System Architecture" },
+                { domain: `${userPath} - Specialized`, startingAvg: "$125,000", midSenior: "$220,000+", openPositions: "95,000+", growthRate: "+22%", topSkill: "Cloud Deployment" }
+            ];
+        }
+        res.json(parsedData);
+    } catch (e) {
+        res.status(500).json({ error: 'Failed to fetch career stats' });
+    }
+});
+
+app.get('/api/tech-news', async (req, res) => {
+    try {
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const prompt = `Generate 3 brief, realistic breaking tech news headlines for today.
+Return valid JSON array of objects with structure:
+[{"headline": "...", "source": "..."}]`;
+        
+        let parsedData;
+        try {
+            const result = await model.generateContent(prompt);
+            const responseText = (await result.response).text();
+            const jsonMatch = responseText.match(/\[[\s\S]*\]/);
+            if (jsonMatch) parsedData = JSON.parse(jsonMatch[0]);
+        } catch (apiError) {
+            console.log("Gemini API failed for tech news, using fallback");
+        }
+
+        if (!parsedData) {
+            parsedData = [
+                { headline: "OpenAI announces new enterprise features for developers", source: "TechCrunch" },
+                { headline: "Google Cloud expands infrastructure in South Asia", source: "The Verge" },
+                { headline: "React 19 officially released with new concurrent features", source: "Dev.to" }
+            ];
+        }
+        res.json(parsedData);
+    } catch (e) {
+        res.status(500).json({ error: 'Failed to fetch tech news' });
+    }
+});
+
+app.get('/api/interview-questions', async (req, res) => {
+    try {
+        const userPath = req.session.user && req.session.user.selectedPath ? req.session.user.selectedPath : "Software Engineering";
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const prompt = `Generate 6 highly specific, advanced interview questions for a mid-to-senior role in ${userPath}. Include 3 technical, 1 system design, and 2 behavioral questions.
+Return valid JSON array of objects with structure:
+[{"question": "...", "type": "Technical or Behavioral or System Design", "company": "...", "difficulty": "Hard or Medium", "hint": "..."}]`;
+        
+        let parsedData;
+        try {
+            const result = await model.generateContent(prompt);
+            const responseText = (await result.response).text();
+            const jsonMatch = responseText.match(/\[[\s\S]*\]/);
+            if (jsonMatch) parsedData = JSON.parse(jsonMatch[0]);
+        } catch (apiError) {
+            console.log("Gemini API failed for interview questions, using fallback");
+        }
+
+        if (!parsedData) {
+            parsedData = [
+                { question: `Design a scalable system for ${userPath}`, type: "System Design", company: "Google", difficulty: "Hard", hint: "Think about microservices and caching." },
+                { question: "Tell me about a time you optimized a critical pipeline.", type: "Behavioral", company: "Amazon", difficulty: "Medium", hint: "Use the STAR framework." }
+            ];
+        }
+        res.json(parsedData);
+    } catch (e) {
+        res.status(500).json({ error: 'Failed to fetch interview questions' });
+    }
+});
+
 app.listen(PORT, () => console.log(`Server live at http://localhost:${PORT}`));

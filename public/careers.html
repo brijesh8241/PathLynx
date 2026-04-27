@@ -59,178 +59,55 @@
         </div>
     </section>
 
-    <!-- Branch 1: CS & IT -->
-    <section class="section-padding">
+    <!-- Unified Career Explorer -->
+    <section class="section-padding" style="background: white;">
         <div class="container-wide">
-            <div class="section-head" style="text-align: left; margin-bottom: 4rem;">
-                <span class="badge-v2 badge-primary">Digital Realm</span>
-                <h2 style="display: flex; align-items: center; gap: 1rem;"><i class="fa-solid fa-laptop-code"></i> Computer Science & IT</h2>
-                <p>From Algorithms to Artificial Intelligence, master the foundations of software excellence.</p>
-            </div>
             
-            <div class="timeline-v2">
-                <div class="timeline-item-v2">
-                    <div class="timeline-dot-v2"></div>
-                    <div class="glass-card reveal hover-lift">
-                        <h3>Years 1 & 2: Fundamentals & Logic</h3>
-                        <p><b>Core:</b> C/C++, Python, Java. Master Data Structures & Algorithms, OOPs, and DBMS. Focus on problem-solving comfort on platforms like LeetCode.</p>
-                    </div>
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem;">
+                <div>
+                    <span class="badge-v2 badge-primary" style="margin-bottom: 0.5rem;">Interactive Explorer</span>
+                    <h2 style="font-size: 2.2rem; font-weight: 800;">Engineering <span style="color: var(--brand-primary);">Pathways</span></h2>
+                    <p style="color: #64748B; font-size: 1.1rem;">Select a domain to map your 4-year trajectory.</p>
                 </div>
-                <div class="timeline-item-v2">
-                    <div class="timeline-dot-v2"></div>
-                    <div class="glass-card">
-                        <h3>Years 3 & 4: Specialization</h3>
-                        <p><b>Stacks:</b> MERN/MEAN stack, Flutter, or Data Science (Pandas, TensorFlow). Learn DevOps basics like Git, Docker, and Cloud deployment.</p>
-                    </div>
-                </div>
-                <div class="timeline-item-v2" style="margin-bottom: 0;">
-                    <div class="timeline-dot-v2"></div>
-                    <div class="glass-card">
-                        <h3>Career Trajectory</h3>
-                        <div class="grid-2" style="margin-top: 1rem;">
-                            <ul style="color: var(--text-muted);">
-                                <li><i class="fa-solid fa-check" style="color: var(--brand-primary);"></i> Software Dev Engineer (SDE)</li>
-                                <li><i class="fa-solid fa-check" style="color: var(--brand-primary);"></i> ML Engineer</li>
-                            </ul>
-                            <ul style="color: var(--text-muted);">
-                                <li><i class="fa-solid fa-check" style="color: var(--brand-primary);"></i> Cloud Architect</li>
-                                <li><i class="fa-solid fa-check" style="color: var(--brand-primary);"></i> Cybersecurity Analyst</li>
-                            </ul>
-                        </div>
-                    </div>
+                <div style="display: flex; gap: 0.5rem; overflow-x: auto;" id="domain-buttons">
+                    <button onclick="setDomain('software')" id="btn-software" style="background: var(--brand-primary); color: white; border: none; padding: 0.6rem 1.5rem; border-radius: 20px; font-weight: 700; cursor: pointer;">Software & AI</button>
+                    <button onclick="setDomain('cloud')" id="btn-cloud" style="background: #F1F5F9; color: #475569; border: none; padding: 0.6rem 1.5rem; border-radius: 20px; font-weight: 700; cursor: pointer;">Cloud & DevOps</button>
+                    <button onclick="setDomain('hardware')" id="btn-hardware" style="background: #F1F5F9; color: #475569; border: none; padding: 0.6rem 1.5rem; border-radius: 20px; font-weight: 700; cursor: pointer;">Hardware & IoT</button>
+                    <button onclick="setDomain('data')" id="btn-data" style="background: #F1F5F9; color: #475569; border: none; padding: 0.6rem 1.5rem; border-radius: 20px; font-weight: 700; cursor: pointer;">Data Science</button>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Branch 2: Mechanical -->
-    <section class="section-padding" style="background: rgba(6, 182, 212, 0.03);">
-        <div class="container-wide">
-            <div class="section-head" style="text-align: left; margin-bottom: 4rem;">
-                <span class="badge-v2 badge-secondary">Physics & Energy</span>
-                <h2 style="display: flex; align-items: center; gap: 1rem;"><i class="fa-solid fa-gear"></i> Mechanical & Automotive</h2>
-                <p>Design, build, and optimize the physical systems that drive industrial progress.</p>
-            </div>
-            
-            <div class="timeline-v2">
-                <div class="timeline-item-v2">
-                    <div class="timeline-dot-v2" style="border-color: var(--brand-secondary);"></div>
-                    <div class="glass-card">
-                        <h3>Years 1 & 2: Mechanics & Material</h3>
-                        <p><b>Foundations:</b> Statics, Dynamics, Thermodynamics. Master 3D modeling with AutoCAD, SolidWorks, or CATIA.</p>
-                    </div>
-                </div>
-                <div class="timeline-item-v2">
-                    <div class="timeline-dot-v2" style="border-color: var(--brand-secondary);"></div>
-                    <div class="glass-card">
-                        <h3>Years 3 & 4: Automation & Robotics</h3>
-                        <p><b>Simulation:</b> ANSYS or Abaqus. Transition to Mechatronics with MATLAB and Arduino/Raspberry Pi. Learn Industry 4.0 standards.</p>
-                    </div>
-                </div>
-                <div class="timeline-item-v2" style="margin-bottom: 0;">
-                    <div class="timeline-dot-v2" style="border-color: var(--brand-secondary);"></div>
-                    <div class="glass-card">
-                        <h3>Career Trajectory</h3>
-                        <div class="grid-2" style="margin-top: 1rem;">
-                            <ul style="color: var(--text-muted);">
-                                <li><i class="fa-solid fa-check" style="color: var(--brand-secondary);"></i> Robotics Engineer</li>
-                                <li><i class="fa-solid fa-check" style="color: var(--brand-secondary);"></i> Structural Designer</li>
-                            </ul>
-                            <ul style="color: var(--text-muted);">
-                                <li><i class="fa-solid fa-check" style="color: var(--brand-secondary);"></i> Thermal Engineer</li>
-                                <li><i class="fa-solid fa-check" style="color: var(--brand-secondary);"></i> QA Lead</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+            <!-- Massive Dynamic Roadmap Layout -->
+            <div style="display: grid; grid-template-columns: 1fr 300px; gap: 3rem;">
+                
+                <!-- Timeline/Graph Area -->
+                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 24px; padding: 3rem; position: relative;">
+                    <!-- Connector Line -->
+                    <div style="position: absolute; left: 3rem; top: 4rem; bottom: 4rem; width: 4px; background: linear-gradient(to bottom, var(--brand-primary), #10B981, #8B5CF6); border-radius: 2px; opacity: 0.3;"></div>
 
-    <!-- Branch 3: ECE -->
-    <section class="section-padding">
-        <div class="container-wide">
-            <div class="section-head" style="text-align: left; margin-bottom: 4rem;">
-                <span class="badge-v2 badge-warning">Hardware & Signal</span>
-                <h2 style="display: flex; align-items: center; gap: 1rem;"><i class="fa-solid fa-microchip"></i> Electronics & Comm.</h2>
-                <p>Bridging the critical gap between raw physical hardware and complex digital logic.</p>
-            </div>
-            
-            <div class="timeline-v2">
-                <div class="timeline-item-v2">
-                    <div class="timeline-dot-v2" style="border-color: var(--brand-warning);"></div>
-                    <div class="glass-card">
-                        <h3>Years 1 & 2: Circuitry & Signals</h3>
-                        <p><b>Foundations:</b> Analog & Digital Electronics, Signals and Systems. Prototype with Breadboards and basic Microcontrollers.</p>
+                    <div id="roadmap-timeline">
+                        <!-- Content will be injected by JavaScript -->
                     </div>
                 </div>
-                <div class="timeline-item-v2">
-                    <div class="timeline-dot-v2" style="border-color: var(--brand-warning);"></div>
-                    <div class="glass-card">
-                        <h3>Years 3 & 4: VLSI & Embedded</h3>
-                        <p><b>Advanced:</b> Master Embedded C, ARM Cortex, and Verilog/VHDL logic design. Understand IoT architectures and 5G protocols.</p>
-                    </div>
-                </div>
-                <div class="timeline-item-v2" style="margin-bottom: 0;">
-                    <div class="timeline-dot-v2" style="border-color: var(--brand-warning);"></div>
-                    <div class="glass-card">
-                        <h3>Career Trajectory</h3>
-                        <div class="grid-2" style="margin-top: 1rem;">
-                            <ul style="color: var(--text-muted);">
-                                <li><i class="fa-solid fa-check" style="color: var(--brand-warning);"></i> Embedded Software Engineer</li>
-                                <li><i class="fa-solid fa-check" style="color: var(--brand-warning);"></i> VLSI Design Engineer</li>
-                            </ul>
-                            <ul style="color: var(--text-muted);">
-                                <li><i class="fa-solid fa-check" style="color: var(--brand-warning);"></i> Network Architect</li>
-                                <li><i class="fa-solid fa-check" style="color: var(--brand-warning);"></i> IoT Developer</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Branch 4: Civil -->
-    <section class="section-padding" style="background: rgba(16, 185, 129, 0.03);">
-        <div class="container-wide">
-            <div class="section-head" style="text-align: left; margin-bottom: 4rem;">
-                <span class="badge-v2 badge-success">Infrastructure</span>
-                <h2 style="display: flex; align-items: center; gap: 1rem;"><i class="fa-solid fa-building"></i> Civil Engineering</h2>
-                <p>Constructing the sustainable and resilient infrastructure of our shared future.</p>
-            </div>
-            
-            <div class="timeline-v2">
-                <div class="timeline-item-v2">
-                    <div class="timeline-dot-v2" style="border-color: var(--brand-success);"></div>
-                    <div class="glass-card">
-                        <h3>Years 1 & 2: Structural Basics</h3>
-                        <p><b>Foundations:</b> Structural Analysis, Fluid & Soil Mechanics. Learn AutoCAD Civil 3D for fundamental builds.</p>
+                <!-- Right Sidebar Metadata -->
+                <div style="display: flex; flex-direction: column; gap: 2rem;">
+                    
+                    <div style="background: var(--bg-dark); color: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
+                        <h4 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.8rem;"><i class="fa-solid fa-crosshairs" style="color: var(--brand-primary);"></i> Top Trajectories</h4>
+                        <ul id="roadmap-trajectories" style="list-style: none; padding: 0; margin: 0; font-size: 0.95rem; line-height: 2;">
+                            <!-- Injected by JS -->
+                        </ul>
                     </div>
-                </div>
-                <div class="timeline-item-v2">
-                    <div class="timeline-dot-v2" style="border-color: var(--brand-success);"></div>
-                    <div class="glass-card">
-                        <h3>Years 3 & 4: Smart Cities & Sustainability</h3>
-                        <p><b>Tools:</b> STAAD.Pro, ETABS, and Primavera. Design sustainable buildings with LEED framework and Smart City logic.</p>
-                    </div>
-                </div>
-                <div class="timeline-item-v2" style="margin-bottom: 0;">
-                    <div class="timeline-dot-v2" style="border-color: var(--brand-success);"></div>
-                    <div class="glass-card">
-                        <h3>Career Trajectory</h3>
-                        <div class="grid-2" style="margin-top: 1rem;">
-                            <ul style="color: var(--text-muted);">
-                                <li><i class="fa-solid fa-check" style="color: var(--brand-success);"></i> Structural Design Engineer</li>
-                                <li><i class="fa-solid fa-check" style="color: var(--brand-success);"></i> Urban Planner</li>
-                            </ul>
-                            <ul style="color: var(--text-muted);">
-                                <li><i class="fa-solid fa-check" style="color: var(--brand-success);"></i> Geotechnical Engineer</li>
-                                <li><i class="fa-solid fa-check" style="color: var(--brand-success);"></i> Project Manager</li>
-                            </ul>
+
+                    <div style="background: white; border: 1px solid #E2E8F0; padding: 2rem; border-radius: 20px;">
+                        <h4 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 1.5rem; border-bottom: 1px solid #E2E8F0; padding-bottom: 0.8rem;"><i class="fa-solid fa-building" style="color: #F59E0B;"></i> Top Employers</h4>
+                        <div id="roadmap-employers" style="display: flex; flex-wrap: wrap; gap: 1rem;">
+                            <!-- Injected by JS -->
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -244,29 +121,10 @@
                 <p style="color: #94A3B8;">Global starting salaries and mid-senior growth trajectories.</p>
             </div>
             
-            <div class="grid-2">
-                <div class="glass-card" style="background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1);">
-                    <h3 style="color: var(--brand-primary); margin-bottom: 1.5rem;">Software Engineering</h3>
-                    <div style="margin-bottom: 1.5rem;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;"><span style="color: #94A3B8;">Starting Avg</span><span style="font-weight: bold; color: white;">$105,000</span></div>
-                        <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px;"><div style="width: 60%; height: 100%; background: var(--brand-primary); border-radius: 4px;"></div></div>
-                    </div>
-                    <div>
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;"><span style="color: #94A3B8;">Mid-Senior</span><span style="font-weight: bold; color: white;">$180,000+</span></div>
-                        <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px;"><div style="width: 90%; height: 100%; background: var(--brand-primary); border-radius: 4px;"></div></div>
-                    </div>
-                </div>
-
-                <div class="glass-card" style="background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1);">
-                    <h3 style="color: var(--brand-warning); margin-bottom: 1.5rem;">Hardware Systems</h3>
-                    <div style="margin-bottom: 1.5rem;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;"><span style="color: #94A3B8;">Starting Avg</span><span style="font-weight: bold; color: white;">$85,000</span></div>
-                        <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px;"><div style="width: 45%; height: 100%; background: var(--brand-warning); border-radius: 4px;"></div></div>
-                    </div>
-                    <div>
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;"><span style="color: #94A3B8;">Mid-Senior</span><span style="font-weight: bold; color: white;">$145,000+</span></div>
-                        <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px;"><div style="width: 75%; height: 100%; background: var(--brand-warning); border-radius: 4px;"></div></div>
-                    </div>
+            <div class="grid-2" id="career-stats-container">
+                <div style="grid-column: 1/-1; text-align: center; padding: 2rem;">
+                    <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 2rem; color: var(--primary);"></i>
+                    <p style="margin-top: 1rem; color: #94A3B8;">Fetching live market data...</p>
                 </div>
             </div>
         </div>
@@ -274,7 +132,146 @@
 
     <script src="js/app.js"></script>
     <script>
-    // Scroll reveal
+    const domainData = {
+        software: {
+            timeline: [
+                { phase: "Phase 1 • Year 1-2", title: "Foundational Logic & Architecture", desc: "Master the primitives. Before building scalable systems, you must understand how data moves at the lowest levels.", skills: ["Data Structures", "Algorithms", "OOPs", "DBMS"], color: "var(--brand-primary)" },
+                { phase: "Phase 2 • Year 3", title: "System Specialization & Scale", desc: "Move from monolithic scripts to microservices. Learn how systems handle millions of concurrent users globally.", skills: ["Microservices", "Docker/K8s", "Caching Layers"], color: "#10B981" },
+                { phase: "Phase 3 • Year 4+", title: "Industry Deployment & AI Integration", desc: "Integrate LLMs and advanced machine learning models into production environments. Lead technical architecture.", skills: ["GenAI Integration", "System Architecture", "Tech Leadership"], color: "#8B5CF6" }
+            ],
+            trajectories: ["AI Engineer", "Backend SDE III", "Data Architect"],
+            employers: ["Google", "Stripe", "OpenAI", "Netflix"]
+        },
+        cloud: {
+            timeline: [
+                { phase: "Phase 1 • Year 1-2", title: "Network & Linux Fundamentals", desc: "Understand TCP/IP, DNS, and shell scripting. The foundation of every cloud infrastructure.", skills: ["Networking", "Linux CLI", "Python Scripting"], color: "var(--brand-primary)" },
+                { phase: "Phase 2 • Year 3", title: "Infrastructure as Code", desc: "Automate server deployment using Terraform and Ansible. Learn CI/CD pipelines.", skills: ["Terraform", "Jenkins/Github Actions", "AWS/Azure"], color: "#10B981" },
+                { phase: "Phase 3 • Year 4+", title: "Site Reliability & Security", desc: "Master Kubernetes orchestration and DevSecOps. Ensure high availability and zero-trust security.", skills: ["Kubernetes", "Prometheus", "Cybersecurity"], color: "#8B5CF6" }
+            ],
+            trajectories: ["Cloud Architect", "DevOps Lead", "SRE Manager"],
+            employers: ["Amazon Web Services", "Microsoft", "DigitalOcean", "HashiCorp"]
+        },
+        hardware: {
+            timeline: [
+                { phase: "Phase 1 • Year 1-2", title: "Circuits & Embedded C", desc: "Logic design and microcontroller programming. Master low-level memory management.", skills: ["Digital Logic", "Embedded C", "Circuit Design"], color: "var(--brand-primary)" },
+                { phase: "Phase 2 • Year 3", title: "VLSI & FPGA Prototyping", desc: "Design hardware circuits using Verilog/VHDL. Implement logic on FPGA boards.", skills: ["Verilog", "FPGA", "PCB Layout"], color: "#10B981" },
+                { phase: "Phase 3 • Year 4+", title: "IoT & Robotics Control", desc: "Build smart systems and autonomous robots. Integrate hardware with AI inference engines.", skills: ["RTOS", "Robotics", "IoT Protocols"], color: "#8B5CF6" }
+            ],
+            trajectories: ["Hardware Engineer", "Embedded Lead", "Robotics Researcher"],
+            employers: ["Intel", "NVIDIA", "Tesla", "Qualcomm"]
+        },
+        data: {
+            timeline: [
+                { phase: "Phase 1 • Year 1-2", title: "Stats & Numerical Python", desc: "Probability, linear algebra, and data manipulation. The math behind the models.", skills: ["Linear Algebra", "Pandas/NumPy", "SQL"], color: "var(--brand-primary)" },
+                { phase: "Phase 2 • Year 3", title: "Deep Learning & NLP", desc: "Build neural networks and language models. Master PyTorch and TensorFlow.", skills: ["Neural Networks", "NLP", "Computer Vision"], color: "#10B981" },
+                { phase: "Phase 3 • Year 4+", title: "Big Data & MLOps", desc: "Scale models to production using Spark and MLflow. Handle petabytes of data.", skills: ["Apache Spark", "MLOps", "Data Engineering"], color: "#8B5CF6" }
+            ],
+            trajectories: ["Data Scientist", "MLOps Engineer", "Analytics Director"],
+            employers: ["Meta", "Databricks", "Uber", "Palantir"]
+        }
+    };
+
+    function setDomain(domain) {
+        const data = domainData[domain];
+        const timelineContainer = document.getElementById('roadmap-timeline');
+        const trajectoriesList = document.getElementById('roadmap-trajectories');
+        const employersContainer = document.getElementById('roadmap-employers');
+
+        // Update Buttons UI
+        document.querySelectorAll('#domain-buttons button').forEach(btn => {
+            btn.style.background = '#F1F5F9';
+            btn.style.color = '#475569';
+        });
+        const activeBtn = document.getElementById(`btn-${domain}`);
+        if(activeBtn) {
+            activeBtn.style.background = 'var(--brand-primary)';
+            activeBtn.style.color = 'white';
+        }
+
+        // Update Timeline
+        if(timelineContainer) {
+            timelineContainer.innerHTML = data.timeline.map((item, idx) => `
+                <div style="display: flex; gap: 2rem; align-items: flex-start; margin-bottom: ${idx === data.timeline.length-1 ? '0' : '3rem'}; position: relative;">
+                    <div style="width: 24px; height: 24px; background: white; border: 4px solid ${item.color}; border-radius: 50%; z-index: 2; margin-left: -10px; margin-top: 5px; box-shadow: 0 0 0 5px rgba(0,0,0,0.03);"></div>
+                    <div class="glass-card reveal" style="flex-grow: 1; padding: 2rem;">
+                        <span style="color: ${item.color}; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">${item.phase}</span>
+                        <h3 style="font-size: 1.5rem; font-weight: 800; margin: 0.5rem 0 1rem 0;">${item.title}</h3>
+                        <p style="color: #64748B; margin-bottom: 1.5rem; line-height: 1.6;">${item.desc}</p>
+                        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                            ${item.skills.map(skill => `<span style="background: white; border: 1px solid #E2E8F0; padding: 0.3rem 0.8rem; border-radius: 6px; font-size: 0.8rem; font-weight: 600;">${skill}</span>`).join('')}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Update Trajectories
+        if(trajectoriesList) {
+            trajectoriesList.innerHTML = data.trajectories.map(t => `
+                <li><i class="fa-solid fa-arrow-right" style="color: #10B981; margin-right: 0.5rem;"></i> ${t}</li>
+            `).join('');
+        }
+
+        // Update Employers
+        if(employersContainer) {
+            employersContainer.innerHTML = data.employers.map(e => `
+                <span style="background: #F1F5F9; padding: 0.5rem 1rem; border-radius: 8px; font-weight: 700; font-size: 0.8rem;">${e}</span>
+            `).join('');
+        }
+
+        // Re-run scroll reveal
+        const revealEls = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.15 });
+        revealEls.forEach(el => observer.observe(el));
+    }
+
+    // Fetch Dynamic Career Stats
+    async function loadCareerStats() {
+        try {
+            const res = await fetch('/api/career-stats');
+            const stats = await res.json();
+            const container = document.getElementById('career-stats-container');
+            if (!container) return;
+            container.innerHTML = '';
+            
+            const colors = ['var(--brand-primary)', 'var(--brand-secondary)', 'var(--brand-warning)', 'var(--brand-success)'];
+            
+            stats.forEach((stat, index) => {
+                const color = colors[index % colors.length];
+                const html = `
+                <div class="glass-card reveal hover-lift" style="background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1);">
+                    <h3 style="color: ${color}; margin-bottom: 1.5rem;">${stat.domain}</h3>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
+                        <span style="background: rgba(255,255,255,0.1); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem;"><i class="fa-solid fa-briefcase"></i> ${stat.openPositions} Jobs</span>
+                        <span style="background: rgba(16,185,129,0.1); color: #34D399; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem;"><i class="fa-solid fa-arrow-trend-up"></i> ${stat.growthRate} Growth</span>
+                    </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;"><span style="color: #94A3B8;">Starting Avg</span><span style="font-weight: bold; color: white;">${stat.startingAvg}</span></div>
+                        <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px;"><div style="width: 50%; height: 100%; background: ${color}; border-radius: 4px; box-shadow: 0 0 10px ${color};"></div></div>
+                    </div>
+                    <div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;"><span style="color: #94A3B8;">Mid-Senior</span><span style="font-weight: bold; color: white;">${stat.midSenior}</span></div>
+                        <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px;"><div style="width: 85%; height: 100%; background: ${color}; border-radius: 4px; box-shadow: 0 0 10px ${color};"></div></div>
+                    </div>
+                </div>`;
+                container.innerHTML += html;
+            });
+            
+            // Re-initialize scroll reveal
+            const revealEls = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.15 });
+            revealEls.forEach(el => observer.observe(el));
+        } catch (e) {
+            console.error('Failed to load career stats', e);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        setDomain('software');
+        loadCareerStats();
+    });
+
+    // Scroll reveal (general)
     const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
@@ -297,4 +294,3 @@
 </body>
 
 </html>
-

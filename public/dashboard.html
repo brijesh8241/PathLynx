@@ -187,19 +187,20 @@
         <nav style="flex-grow: 1;">
             <ul id="roles-nav-container" style="list-style: none; padding: 0;">
                 <!-- Roles injected by JS -->
-                <div class="role-nav-student" style="display: none;">
+                <div class="role-nav-student" style="display: block;">
                     <li><a href="dashboard.html" class="nav-link active"><i class="fa-solid fa-chart-pie"></i> Overview</a></li>
-                    <li><a href="curriculum.html" class="nav-link"><i class="fa-solid fa-book-open"></i> Curriculum</a></li>
+                    <li><a href="careers.html" class="nav-link"><i class="fa-solid fa-book-open"></i> Career Path</a></li>
                     <li><a href="projects.html" class="nav-link"><i class="fa-solid fa-code"></i> Projects</a></li>
                     <li><a href="resume.html" class="nav-link"><i class="fa-solid fa-file-lines"></i> Resume AI</a></li>
+                    <li><a href="interview.html" class="nav-link"><i class="fa-solid fa-microphone"></i> Mock Interview</a></li>
                 </div>
                 <div class="role-nav-recruiter" style="display: none;">
-                    <li><a href="#" class="nav-link active"><i class="fa-solid fa-users"></i> Talent Pool</a></li>
-                    <li><a href="#" class="nav-link"><i class="fa-solid fa-calendar-check"></i> Interviews</a></li>
+                    <li><a href="dashboard.html" class="nav-link active"><i class="fa-solid fa-users"></i> Talent Pool</a></li>
+                    <li><a href="interview.html" class="nav-link"><i class="fa-solid fa-calendar-check"></i> Interviews</a></li>
                 </div>
                 <div class="role-nav-admin" style="display: none;">
-                    <li><a href="#" class="nav-link active"><i class="fa-solid fa-server"></i> System</a></li>
-                    <li><a href="#" class="nav-link"><i class="fa-solid fa-user-shield"></i> User Mgmt</a></li>
+                    <li><a href="dashboard.html" class="nav-link active"><i class="fa-solid fa-server"></i> System</a></li>
+                    <li><a href="dashboard.html" class="nav-link"><i class="fa-solid fa-user-shield"></i> User Mgmt</a></li>
                 </div>
             </ul>
         </nav>
@@ -210,83 +211,161 @@
         </div>
     </aside>
 
-    <!-- Main Content -->
-    <main class="main-content">
+    <main class="main-content" style="background: var(--main-bg);">
         
-        <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3.5rem;">
+        <header style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2.5rem; border-bottom: 1px solid #E2E8F0; padding-bottom: 1.5rem;">
             <div>
-                <h1 id="dash-title" style="font-size: 2.25rem; font-weight: 800; color: #0F172A; margin-bottom: 0.5rem;">Role Experience Portal</h1>
-                <p id="dash-subtitle" style="color: #64748B; font-size: 1.1rem;">Track your progress and professional growth.</p>
+                <span class="badge" style="background: #E0E7FF; color: var(--primary); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.75rem; font-weight: 700; margin-bottom: 0.5rem; display: inline-block;">Beta Workspace</span>
+                <h1 id="dash-title" style="font-size: 2.5rem; font-weight: 900; color: #0F172A; margin-bottom: 0.2rem; letter-spacing: -0.5px;">Command Center</h1>
+                <p id="dash-subtitle" style="color: #64748B; font-size: 1.05rem;">AI-driven insights for your professional growth.</p>
             </div>
-            <div style="display: flex; align-items: center; gap: 1.5rem;">
+            <div style="display: flex; align-items: center; gap: 1.2rem;">
                 <div style="text-align: right;">
                     <p id="dash-user-name" style="font-weight: 800; color: #0F172A; font-size: 1.1rem;">User Name</p>
-                    <p id="dash-user-role" style="font-size: 0.9rem; color: var(--primary); font-weight: 600;">Role Designation</p>
+                    <p id="dash-user-role" style="font-size: 0.85rem; color: var(--primary); font-weight: 600;">Role Designation</p>
                 </div>
-                <div id="dash-profile-initials" style="width: 50px; height: 50px; border-radius: 15px; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.25rem; box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);">UN</div>
+                <div id="dash-profile-initials" style="width: 55px; height: 55px; border-radius: 16px; background: linear-gradient(135deg, var(--primary), #8B5CF6); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.4rem; box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.4);">UN</div>
             </div>
         </header>
 
-        <!-- Dynamic Stat Grids -->
-        <section id="stats-student" style="display: none; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-bottom: 3rem;">
-            <div class="stat-card">
-                <p style="color: #64748B; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.75rem;">Day Streak</p>
-                <h3 style="font-size: 1.75rem; font-weight: 800;">12 Days</h3>
+        <!-- Top Overview Stats -->
+        <section id="stats-student" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem;">
+            <div class="stat-card" style="background: white; padding: 1.8rem; border-radius: 20px; border: 1px solid #E2E8F0; box-shadow: 0 4px 15px rgba(0,0,0,0.02); display: flex; align-items: center; gap: 1.5rem;">
+                <div style="width: 60px; height: 60px; border-radius: 14px; background: #EEF2FF; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.8rem;">
+                    <i class="fa-solid fa-fire"></i>
+                </div>
+                <div>
+                    <p style="color: #64748B; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Streak</p>
+                    <h3 style="font-size: 1.8rem; font-weight: 900; color: #0F172A;">12 <span style="font-size: 1rem; color: #94A3B8; font-weight: 600;">Days</span></h3>
+                </div>
             </div>
-            <div class="stat-card">
-                <p style="color: #64748B; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.75rem;">Curriculum</p>
-                <h3 style="font-size: 1.75rem; font-weight: 800;">85%</h3>
+            <div class="stat-card" style="background: white; padding: 1.8rem; border-radius: 20px; border: 1px solid #E2E8F0; box-shadow: 0 4px 15px rgba(0,0,0,0.02); display: flex; align-items: center; gap: 1.5rem;">
+                <div style="width: 60px; height: 60px; border-radius: 14px; background: #ECFDF5; display: flex; align-items: center; justify-content: center; color: #10B981; font-size: 1.8rem;">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <div>
+                    <p style="color: #64748B; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Readiness</p>
+                    <h3 style="font-size: 1.8rem; font-weight: 900; color: #0F172A;">85<span style="font-size: 1.2rem; color: #94A3B8;">%</span></h3>
+                </div>
             </div>
-            <div class="stat-card">
-                <p style="color: #64748B; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.75rem;">Skill Score</p>
-                <h3 style="font-size: 1.75rem; font-weight: 800;">4.9/5</h3>
+            <div class="stat-card" style="background: white; padding: 1.8rem; border-radius: 20px; border: 1px solid #E2E8F0; box-shadow: 0 4px 15px rgba(0,0,0,0.02); display: flex; align-items: center; gap: 1.5rem;">
+                <div style="width: 60px; height: 60px; border-radius: 14px; background: #FEF3C7; display: flex; align-items: center; justify-content: center; color: #F59E0B; font-size: 1.8rem;">
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <div>
+                    <p style="color: #64748B; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">AI Score</p>
+                    <h3 style="font-size: 1.8rem; font-weight: 900; color: #0F172A;">4.9<span style="font-size: 1.2rem; color: #94A3B8;">/5</span></h3>
+                </div>
             </div>
-            <div class="stat-card">
-                <p style="color: #64748B; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.75rem;">Applications</p>
-                <h3 style="font-size: 1.75rem; font-weight: 800;">3 Roles</h3>
+            <div class="stat-card" style="background: white; padding: 1.8rem; border-radius: 20px; border: 1px solid #E2E8F0; box-shadow: 0 4px 15px rgba(0,0,0,0.02); display: flex; align-items: center; gap: 1.5rem;">
+                <div style="width: 60px; height: 60px; border-radius: 14px; background: #FCE7F3; display: flex; align-items: center; justify-content: center; color: #EC4899; font-size: 1.8rem;">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </div>
+                <div>
+                    <p style="color: #64748B; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Applications</p>
+                    <h3 style="font-size: 1.8rem; font-weight: 900; color: #0F172A;">3 <span style="font-size: 1rem; color: #94A3B8; font-weight: 600;">Active</span></h3>
+                </div>
             </div>
         </section>
 
-        <!-- Similar grids for Recruiter/Admin can be added here if needed, but Student is primary -->
-
-        <div class="dashboard-layout">
-            <div class="main-column">
-                <section id="section-student" class="role-section" style="display: none;">
-                    <div class="content-card">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem;">
-                            <h2 style="font-size: 1.6rem; font-weight: 800;">Your Intelligence Roadmap</h2>
-                            <button class="btn-premium" onclick="showOnboardingOverlay()">Update My Path <i class="fa-solid fa-wand-magic-sparkles"></i></button>
+        <!-- Main Dashboard Grid -->
+        <div class="dashboard-layout" style="display: grid; grid-template-columns: 2fr 1fr; gap: 2.5rem;">
+            
+            <!-- Left Column: Primary Content -->
+            <div class="main-column" style="display: flex; flex-direction: column; gap: 2.5rem;">
+                
+                <!-- Roadmap Section -->
+                <section id="section-student" class="role-section content-card" style="background: white; border-radius: 24px; padding: 2.5rem; border: 1px solid #E2E8F0; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                        <div>
+                            <h2 style="font-size: 1.6rem; font-weight: 800; color: #0F172A;">Intelligence Roadmap</h2>
+                            <p style="color: #64748B; font-size: 0.9rem; margin-top: 0.3rem;">Your personalized curriculum mapped by AI.</p>
                         </div>
-                        <div id="career-path-container">
-                            <!-- Roadmap modules will be injected here as .roadmap-step elements -->
+                        <button class="btn-premium" onclick="showOnboardingOverlay()" style="background: #0F172A;"><i class="fa-solid fa-rotate"></i> Recalibrate Path</button>
+                    </div>
+                    <div id="career-path-container">
+                        <div style="text-align: center; padding: 3rem; background: #F8FAFC; border-radius: 16px; border: 1px dashed #CBD5E1;">
+                            <i class="fa-solid fa-route" style="font-size: 3rem; color: #94A3B8; margin-bottom: 1rem;"></i>
+                            <h3 style="font-weight: 700; margin-bottom: 0.5rem;">No Path Defined Yet</h3>
+                            <p style="color: #64748B; font-size: 0.9rem;">Click "Recalibrate Path" to let our AI generate your optimal career trajectory.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Project Portfolio Preview -->
+                <section class="content-card" style="background: white; border-radius: 24px; padding: 2.5rem; border: 1px solid #E2E8F0; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                        <h2 style="font-size: 1.6rem; font-weight: 800; color: #0F172A;"><i class="fa-solid fa-diagram-project" style="color: var(--primary);"></i> Active Projects</h2>
+                        <a href="projects.html" style="color: var(--primary); font-weight: 700; text-decoration: none; font-size: 0.9rem;">View All <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                    <div style="display: flex; gap: 1.5rem; overflow-x: auto; padding-bottom: 1rem;">
+                        <div style="min-width: 300px; border: 1px solid #E2E8F0; border-radius: 16px; padding: 1.5rem; background: #F8FAFC;">
+                            <span style="background: #DBEAFE; color: #1E40AF; padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.7rem; font-weight: 700; margin-bottom: 1rem; display: inline-block;">In Progress</span>
+                            <h4 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 0.5rem;">E-Commerce Microservices</h4>
+                            <p style="font-size: 0.85rem; color: #64748B; margin-bottom: 1rem;">Building scalable payment gateways using Node & Docker.</p>
+                            <div style="width: 100%; height: 6px; background: #E2E8F0; border-radius: 3px;"><div style="width: 65%; height: 100%; background: var(--primary); border-radius: 3px;"></div></div>
+                        </div>
+                        <div style="min-width: 300px; border: 1px solid #E2E8F0; border-radius: 16px; padding: 1.5rem; background: #F8FAFC;">
+                            <span style="background: #D1FAE5; color: #065F46; padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.7rem; font-weight: 700; margin-bottom: 1rem; display: inline-block;">Deployed</span>
+                            <h4 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 0.5rem;">Real-time Chat Engine</h4>
+                            <p style="font-size: 0.85rem; color: #64748B; margin-bottom: 1rem;">WebSocket implementation with Redis caching layer.</p>
+                            <div style="width: 100%; height: 6px; background: #E2E8F0; border-radius: 3px;"><div style="width: 100%; height: 100%; background: #10B981; border-radius: 3px;"></div></div>
                         </div>
                     </div>
                 </section>
                 
-                <!-- Recruiter/Admin sections -->
-                <section id="section-recruiter" class="role-section" style="display: none;">
-                    <div class="content-card"><h2>Candidate Pipelines</h2><p style="color: #64748B; margin-top: 1rem;">No active pipelines currently.</p></div>
-                </section>
-                <section id="section-admin" class="role-section" style="display: none;">
-                    <div class="content-card"><h2>System Health</h2><p style="color: #64748B; margin-top: 1rem;">All infrastructure operational.</p></div>
-                </section>
             </div>
 
-            <div class="side-column">
-                <section class="content-card" style="margin-bottom: 2rem;">
-                    <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 1.5rem;">Skill Matrix</h3>
-                    <div id="side-student-radar" style="display: none; text-align: center; padding: 1rem;">
-                        <img src="https://img.icons8.com/color/96/000000/radar-chart.png" alt="Radar" style="opacity: 0.5; filter: grayscale(1);">
-                        <p style="font-size: 0.85rem; color: #64748B; margin-top: 1rem;">Analyzing your skill overlaps...</p>
-                    </div>
-                    <p style="font-size: 0.85rem; color: #64748B; line-height: 1.6;">PathLynx Intelligence is processing your projects to map your technical proficiencies.</p>
+            <!-- Right Column: Sidebar Widgets -->
+            <div class="side-column" style="display: flex; flex-direction: column; gap: 2.5rem;">
+                
+                <!-- Action Required -->
+                <section class="content-card" style="background: white; border-radius: 24px; padding: 2rem; border: 1px solid #FCA5A5; box-shadow: 0 10px 30px -10px rgba(239, 68, 68, 0.1);">
+                    <h3 style="font-size: 1.2rem; font-weight: 800; color: #B91C1C; margin-bottom: 1rem;"><i class="fa-solid fa-triangle-exclamation"></i> Action Required</h3>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="display: flex; gap: 1rem; align-items: flex-start; padding-bottom: 1rem; border-bottom: 1px solid #FEE2E2; margin-bottom: 1rem;">
+                            <div style="background: #FEE2E2; color: #DC2626; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><i class="fa-solid fa-file-pdf"></i></div>
+                            <div>
+                                <h4 style="font-size: 0.9rem; font-weight: 700; color: #0F172A;">Resume ATS Score Low</h4>
+                                <p style="font-size: 0.8rem; color: #64748B; margin-top: 0.2rem;">Your latest resume scored 62%. Update keywords.</p>
+                                <a href="resume.html" style="font-size: 0.8rem; font-weight: 700; color: var(--primary); display: inline-block; margin-top: 0.5rem; text-decoration: none;">Fix Now</a>
+                            </div>
+                        </li>
+                        <li style="display: flex; gap: 1rem; align-items: flex-start;">
+                            <div style="background: #FEF3C7; color: #D97706; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><i class="fa-solid fa-calendar-check"></i></div>
+                            <div>
+                                <h4 style="font-size: 0.9rem; font-weight: 700; color: #0F172A;">Upcoming Mock Interview</h4>
+                                <p style="font-size: 0.8rem; color: #64748B; margin-top: 0.2rem;">Tomorrow at 10:00 AM PST with AI Assessor.</p>
+                                <a href="interview.html" style="font-size: 0.8rem; font-weight: 700; color: var(--primary); display: inline-block; margin-top: 0.5rem; text-decoration: none;">Prepare</a>
+                            </div>
+                        </li>
+                    </ul>
                 </section>
 
-                <section class="content-card" style="background: linear-gradient(135deg, #6366F1, #8B5CF6); color: white; border: none;">
-                    <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 1rem;">Pro Mentor</h3>
-                    <p style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 1.5rem;">Connect with industry leaders from top global companies for 1:1 sessions.</p>
-                    <button class="btn" style="background: white; color: var(--primary); font-weight: 800; width: 100%; border: none; padding: 0.8rem; border-radius: 12px; cursor: pointer;">Get Pro Access</button>
+                <!-- Skill Radar -->
+                <section class="content-card" style="background: white; border-radius: 24px; padding: 2rem; border: 1px solid #E2E8F0;">
+                    <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 1.5rem;"><i class="fa-solid fa-brain" style="color: var(--primary);"></i> AI Skill Radar</h3>
+                    <div style="position: relative; height: 200px; display: flex; align-items: center; justify-content: center; background: url('https://img.icons8.com/external-flatart-icons-lineal-color-flatarticons/128/000000/external-radar-seo-flatart-icons-lineal-color-flatarticons.png') center/contain no-repeat; opacity: 0.8;">
+                        <!-- Mockup Radar Chart -->
+                        <div style="position: absolute; width: 100px; height: 100px; background: rgba(99, 102, 241, 0.2); border: 2px solid var(--primary); clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%); animation: pulse 2s infinite;"></div>
+                    </div>
+                    <style>@keyframes pulse { 0% { transform: scale(1); opacity: 0.8;} 50% { transform: scale(1.05); opacity: 1;} 100% { transform: scale(1); opacity: 0.8;} }</style>
+                    <div style="margin-top: 1.5rem;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 700; margin-bottom: 0.5rem;"><span style="color: #64748B;">Algorithms</span> <span style="color: var(--primary);">92%</span></div>
+                        <div style="width: 100%; height: 4px; background: #E2E8F0; border-radius: 2px; margin-bottom: 1rem;"><div style="width: 92%; height: 100%; background: var(--primary); border-radius: 2px;"></div></div>
+                        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 700; margin-bottom: 0.5rem;"><span style="color: #64748B;">System Design</span> <span style="color: #10B981;">65%</span></div>
+                        <div style="width: 100%; height: 4px; background: #E2E8F0; border-radius: 2px;"><div style="width: 65%; height: 100%; background: #10B981; border-radius: 2px;"></div></div>
+                    </div>
                 </section>
+
+                <!-- Pro Upgrade -->
+                <section class="content-card hover-lift" style="background: linear-gradient(135deg, #0F172A, #1E293B); color: white; border: none; border-radius: 24px; padding: 2.5rem; text-align: center; cursor: pointer; transition: transform 0.3s ease;">
+                    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #F59E0B, #D97706); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: white; margin: 0 auto 1.5rem auto; box-shadow: 0 10px 20px rgba(245, 158, 11, 0.4);"><i class="fa-solid fa-crown"></i></div>
+                    <h3 style="font-size: 1.4rem; font-weight: 900; margin-bottom: 0.8rem;">Antigravity Pro</h3>
+                    <p style="font-size: 0.9rem; color: #94A3B8; margin-bottom: 1.8rem; line-height: 1.5;">Unlock 1-on-1 mentorship, advanced mock interviews, and unlimited AI architectural generation.</p>
+                    <button class="btn-premium" style="width: 100%; justify-content: center; background: white; color: #0F172A; font-weight: 900;">Upgrade to Pro</button>
+                </section>
+
             </div>
         </div>
 
